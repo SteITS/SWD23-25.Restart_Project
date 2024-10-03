@@ -13,12 +13,16 @@ public class CardServiceImpl implements CardService{
 	@Autowired
 	private CardDAO dao;
 	
-	
+	@Override
+	public List<Card> getCardsByName(String name) {
+		return dao.findByName(name);
+	}
 
 	@Override
 	public List<Card> getCards() {
 		return dao.findAll();
 	}
+
 
 	
 }

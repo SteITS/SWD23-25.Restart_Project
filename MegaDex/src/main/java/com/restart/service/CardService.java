@@ -6,6 +6,10 @@ import com.restart.entity.Card;
 
 public interface CardService {
 
+
+	List<Card> getCardsByName(String name);
+
 	List<Card> getCards();
+
 	
 }
