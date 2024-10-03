@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restart.entity.Card;
-import com.restart.repository.CardDAO;
+import com.restart.repository.CardRepository;
 @Service
 public class CardServiceImpl implements CardService{
 
 	@Autowired
-	private CardDAO dao;
+	private CardRepository dao;
 	
 	@Override
 	public List<Card> getCardsByName(String name) {
