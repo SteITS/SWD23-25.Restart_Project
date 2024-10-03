@@ -14,7 +14,7 @@ import com.restart.service.CardService;
 
 
 @RestController
-public class CardRest {
+public class CardController {
 	@Autowired
 	private CardService service;
 	
