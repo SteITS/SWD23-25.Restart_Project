@@ -13,4 +13,5 @@ public interface CardRepository extends JpaRepository<Card, String>{
 	List<Card> findByName(String name);
 	List<Card> findBySupertypeName(String name);
 	List<Card> findByTypes_Name(String name);
+	List<Card> findBySubtypes_Name(String name);
 }

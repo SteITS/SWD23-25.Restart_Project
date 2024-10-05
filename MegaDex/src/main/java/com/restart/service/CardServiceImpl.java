@@ -33,6 +33,11 @@ public class CardServiceImpl implements CardService{
         return dao.findByTypes_Name(name);
     }
 
+	@Override
+	public List<Card> getCardsBySubtype(String name) {
+		return dao.findBySubtypes_Name(name);
+	}
+
 
 	
 }
