@@ -12,4 +12,6 @@ public interface CardService {
 	List<Card> getCards();
 
 	List<Card> getCardsBySupertypeName(String name);
+	
+	List<Card> getCardsByType(String name);
 }
