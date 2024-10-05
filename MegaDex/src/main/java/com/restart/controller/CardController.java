@@ -34,4 +34,8 @@ public class CardController {
 		return service.getCardsBySupertypeName(supertype);
 	}
 	
+	@GetMapping("/cards/type={type}")
+	public List<Card> getCardsByType(@PathVariable String type) {
+		return service.getCardsByType(type);
+	}
 }
