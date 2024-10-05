@@ -42,5 +42,8 @@ public class CardController {
 	public List<Card> getCardsBySubtype(@PathVariable String subtype) {
 		return service.getCardsBySubtype(subtype);
 	}
-	
+	@GetMapping("/cards/set={set}")
+	public List<Card> getCardsBySet(@PathVariable String set) {
+		return service.getCardsBySet(set);
+	}
 }

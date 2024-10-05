@@ -16,4 +16,6 @@ public interface CardService {
 	List<Card> getCardsByType(String name);
 	
 	List<Card> getCardsBySubtype(String name);
+	
+	List<Card> getCardsBySet(String name);
 }
