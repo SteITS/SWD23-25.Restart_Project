@@ -23,6 +23,11 @@ public class CardServiceImpl implements CardService{
 		return dao.findAll();
 	}
 
+	@Override
+	public List<Card> getCardsBySupertypeName(String name) {
+		return dao.findBySupertypeName(name);
+	}
+
 
 	
 }
