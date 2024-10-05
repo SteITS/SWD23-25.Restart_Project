@@ -38,4 +38,9 @@ public class CardController {
 	public List<Card> getCardsByType(@PathVariable String type) {
 		return service.getCardsByType(type);
 	}
+	@GetMapping("/cards/subtype={subtype}")
+	public List<Card> getCardsBySubtype(@PathVariable String subtype) {
+		return service.getCardsBySubtype(subtype);
+	}
+	
 }
