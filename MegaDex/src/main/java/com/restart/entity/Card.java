@@ -307,5 +307,125 @@ public class Card {
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	public String getEvolves_from() {
+		return evolves_from;
+	}
+
+	public void setEvolves_from(String evolves_from) {
+		this.evolves_from = evolves_from;
+	}
+
+	public String getEvolves_to() {
+		return evolves_to;
+	}
+
+	public void setEvolves_to(String evolves_to) {
+		this.evolves_to = evolves_to;
+	}
+
+	public String getRetreat_cost() {
+		return retreat_cost;
+	}
+
+	public void setRetreat_cost(String retreat_cost) {
+		this.retreat_cost = retreat_cost;
+	}
+
+	public String getConverted_retreat_cost() {
+		return converted_retreat_cost;
+	}
+
+	public void setConverted_retreat_cost(String converted_retreat_cost) {
+		this.converted_retreat_cost = converted_retreat_cost;
+	}
+
+	public String getFlavor_text() {
+		return flavor_text;
+	}
+
+	public void setFlavor_text(String flavor_text) {
+		this.flavor_text = flavor_text;
+	}
+
+	public String getNational_pokedex_numbers() {
+		return national_pokedex_numbers;
+	}
+
+	public void setNational_pokedex_numbers(String national_pokedex_numbers) {
+		this.national_pokedex_numbers = national_pokedex_numbers;
+	}
+
+	public String getRegulation_mark() {
+		return regulation_mark;
+	}
+
+	public void setRegulation_mark(String regulation_mark) {
+		this.regulation_mark = regulation_mark;
+	}
+
+	public String getAncient_trait() {
+		return ancient_trait;
+	}
+
+	public void setAncient_trait(String ancient_trait) {
+		this.ancient_trait = ancient_trait;
+	}
+
+	public Set<Attack> getAttacks() {
+		return attacks;
+	}
+
+	public void setAttacks(Set<Attack> attacks) {
+		this.attacks = attacks;
+	}
+
+	public Set<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(Set<Ability> abilities) {
+		this.abilities = abilities;
+	}
+
+	public Set<Weakness> getWeaknesses() {
+		return weaknesses;
+	}
+
+	public void setWeaknesses(Set<Weakness> weaknesses) {
+		this.weaknesses = weaknesses;
+	}
+
+	public Set<Resistance> getResistances() {
+		return resistances;
+	}
+
+	public void setResistances(Set<Resistance> resistances) {
+		this.resistances = resistances;
+	}
+
+	public Set<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(Set<Type> types) {
+		this.types = types;
+	}
+
+	public Set<Subtype> getSubtypes() {
+		return subtypes;
+	}
+
+	public void setSubtypes(Set<Subtype> subtypes) {
+		this.subtypes = subtypes;
+	}
+
+	public Supertype getSupertype() {
+		return supertype;
+	}
+
+	public void setSupertype(Supertype supertype) {
+		this.supertype = supertype;
+	}
 	
 }

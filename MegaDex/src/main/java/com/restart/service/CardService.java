@@ -18,4 +18,6 @@ public interface CardService {
 	List<Card> getCardsBySubtype(String name);
 	
 	List<Card> getCardsBySet(String name);
+	
+	List<Card> getFilteredCards(String Id,String name, String supertype, String type, String subtype, String set);
 }
