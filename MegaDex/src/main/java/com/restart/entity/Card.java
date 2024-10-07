@@ -1,5 +1,4 @@
 package com.restart.entity;
-
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -429,3 +428,4 @@ public class Card {
 	}
 	
 }
+

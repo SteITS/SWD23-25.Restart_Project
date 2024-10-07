@@ -1,5 +1,9 @@
 package com.restart.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,9 +33,15 @@ public class User
     @Column(nullable=false, unique=true)
     private String email;
 
+    @JsonIgnore
     @Column(nullable=false)
     private String password;
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sleeve> Sleeves;
+
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(
             name="users_roles",
