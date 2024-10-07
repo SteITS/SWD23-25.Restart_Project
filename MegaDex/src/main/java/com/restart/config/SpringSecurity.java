@@ -28,8 +28,9 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/api/**").permitAll()
-                                .requestMatchers("/register/**").permitAll()
+                        authorize.requestMatchers("/register/**").permitAll()
+                        		    .requestMatchers("/cards/**").permitAll()
+                                .requestMatchers("/api/**").permitAll()
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
