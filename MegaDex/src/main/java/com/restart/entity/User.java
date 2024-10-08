@@ -36,6 +36,9 @@ public class User
     @JsonIgnore
     @Column(nullable=false)
     private String password;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Deck> decks;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
