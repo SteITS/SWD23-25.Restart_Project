@@ -1,5 +1,6 @@
 package com.restart.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import org.hibernate.annotations.Nationalized;
@@ -12,8 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class SlotId {
-
+public class SlotId implements Serializable {
 	 @Column(name = "id_deck", nullable = false)
 	 private Integer idDeck;
 

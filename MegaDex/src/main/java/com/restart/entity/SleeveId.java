@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Nationalized;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,8 +15,6 @@ import java.util.Objects;
 @Setter
 @Embeddable
 public class SleeveId implements Serializable {
-    private static final long serialVersionUID = 7606036724212653793L;
-
     @Column(name = "id_user", nullable = false)
     private Integer idUser;
 
