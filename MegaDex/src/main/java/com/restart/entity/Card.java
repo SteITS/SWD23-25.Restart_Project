@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -16,55 +17,55 @@ import jakarta.persistence.Table;
 public class Card {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "id", nullable = false, length = 50)
 	private String id;
-	@Column(name = "expansion")
+	@Column(name = "expansion", length = 50)
 	private String set;
-	
+	@Column(name = "series", length = 50)
 	private String series;
-	
+	@Column(name = "publisher", length = 10)
 	private String publisher;
-	
+	@Column(name = "generation", length = 15)
 	private String generation;
-	
+	@Column(name = "release_date", length = 50)
 	private String release_date;
-	
+	@Column(name = "artist", length = 50)
 	private String artist;
-	
+	@Column(name = "name", length = 70)
 	private String name;
 	
 	private String set_num;
 	
-	@Column(name = "card_level")
+	@Column(name = "card_level", length = 5)
 	private String level;
-	
+	@Column(name = "hp", length = 5)
 	private String hp;
-	
+	@Column(name = "evolves_from", length = 70)
 	private String evolves_from;
-	
+	@Column(name = "evolves_to", length = 70)
 	private String evolves_to;
-	
+	@Column(name = "retreat_cost", length = 70)
 	private String retreat_cost;
-	
+	@Column(name = "converted_retreat_cost", length = 5)
 	private String converted_retreat_cost;
-	
+	@Column(name = "rarity", length = 50)
 	private String rarity;
 	
 	private String flavor_text;
-	
+	@Column(name = "national_pokedex_numbers", length = 50)
 	private String national_pokedex_numbers;
-	
+	@Column(name = "legalities", length = 100)
 	private String legalities;
 	
 	private String rules;
-	
+	@Column(name = "regulation_mark", length = 50)
 	private String regulation_mark;
-	
+	@Column(name = "ancient_trait", length = 50)
 	private String ancient_trait;
 	
 	private String img;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_attacks",
 			joinColumns = @JoinColumn(name="card_id"),
@@ -73,7 +74,7 @@ public class Card {
 	@JsonManagedReference
 	private Set<Attack> attacks;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_abilities",
 			joinColumns = @JoinColumn(name="card_id"),
@@ -81,7 +82,7 @@ public class Card {
 			)
 	@JsonManagedReference
 	private Set<Ability> abilities;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_weaknesses",
 			joinColumns = @JoinColumn(name="card_id"),
@@ -90,7 +91,7 @@ public class Card {
 	@JsonManagedReference
 	private Set<Weakness> weaknesses;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_resistances",
 			joinColumns = @JoinColumn(name="card_id"),
@@ -99,7 +100,7 @@ public class Card {
 	@JsonManagedReference
 	private Set<Resistance> resistances;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_types",
 			joinColumns = @JoinColumn(name="card_id"),
@@ -108,7 +109,7 @@ public class Card {
 	@JsonManagedReference
 	private Set<Type> types;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_subtypes",
 			joinColumns = @JoinColumn(name="card_id"),

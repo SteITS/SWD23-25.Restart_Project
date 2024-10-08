@@ -19,19 +19,26 @@ public class CardController {
 	@Autowired
 	private CardService service;
 	
+	//senza parametri sarà una lista di tutte le carte nel DB
 	@GetMapping("/cards")
     public ResponseEntity<List<Card>> getFilteredCards(
-    	@RequestParam(required = false) String Id,
-        @RequestParam(required = false) String name,
-        @RequestParam(required = false) String supertype,
-        @RequestParam(required = false) String type,
-        @RequestParam(required = false) String subtype,
-        @RequestParam(required = false) String set) {
+    	@RequestParam(required = false) String Id,  //ricerca per Id
+        @RequestParam(required = false) String name, //ricerca per nome
+        @RequestParam(required = false) String supertype, //ricerca per per supertipo
+        @RequestParam(required = false) String type,	//ricerca per per tipo
+        @RequestParam(required = false) String subtype,	//ricerca per per sottotipo
+        @RequestParam(required = false) String set,		//ricerca per per espansione
+    	@RequestParam(defaultValue = "1") int page) // Inizia paginazione da 1
+	{
 
-        List<Card> filteredCards = service.getFilteredCards(Id, name, supertype, type, subtype, set);
-        return new ResponseEntity<>(filteredCards, HttpStatus.OK);
+		List<Card> filteredCards = service.getFilteredCards(Id, name, supertype, type, subtype, set, page); 
+        return new ResponseEntity<>(filteredCards, HttpStatus.OK); //ritorna una lista di carte filtrate
     }
 	
+	
+	//Da qui in poi sono filtri che funzionano solo uno per volta, non vengono utilizzati
+	
+	/*
 	@GetMapping("/single")
 	public ResponseEntity<List<Card>> getCards(){
 		return new ResponseEntity<>(service.getCards(),HttpStatus.OK);
@@ -59,6 +66,5 @@ public class CardController {
 	public List<Card> getCardsBySet(@PathVariable String set) {
 		return service.getCardsBySet(set);
 	}
-	
-	
+	*/
 }
