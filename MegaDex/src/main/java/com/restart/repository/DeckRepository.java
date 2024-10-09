@@ -10,6 +10,5 @@ import com.restart.entity.Deck;
 @Repository
 public interface DeckRepository extends JpaRepository<Deck, Integer>{
 
-	List<Deck> findAll();
 	List<Deck> findByName(String name);
 }
