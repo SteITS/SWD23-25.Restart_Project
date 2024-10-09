@@ -6,6 +6,7 @@ import com.restart.entity.Card;
 
 public interface CardService {
 
+	List<Card> getFilteredCards(String Id,String name, String supertype, String type, String subtype, String set, int page);
 
 	List<Card> getCardsByName(String name);
 
@@ -19,5 +20,4 @@ public interface CardService {
 	
 	List<Card> getCardsBySet(String name);
 	
-	List<Card> getFilteredCards(String Id,String name, String supertype, String type, String subtype, String set);
 }
