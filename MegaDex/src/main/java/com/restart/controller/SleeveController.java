@@ -1,7 +1,9 @@
 package com.restart.controller;
 
+import com.restart.entity.Card;
 import com.restart.entity.Sleeve;
 import com.restart.entity.User;
+import com.restart.service.CardServiceImpl;
 import com.restart.service.SleeveService;
 import com.restart.service.SleeveServiceImpl;
 import com.restart.service.UserServiceImpl;
@@ -19,6 +21,8 @@ public class SleeveController {
         @Autowired
         private UserServiceImpl userService;
         @Autowired
+        private CardServiceImpl cardService;
+        @Autowired
         private SleeveServiceImpl sleeveService;
 
 
@@ -29,9 +33,15 @@ public class SleeveController {
         User user = userService.findUserById(sleeveRequest.getId().getIdUser())
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + sleeveRequest.getId().getIdUser()));
 
+        Card card = cardService.getCardById(sleeveRequest.getId().getIdCard())
+                .orElseThrow(() -> new RuntimeException("Card not found with ID: " + sleeveRequest.getId().getIdUser()));
+
+
         // Crea la nuova Sleeve e associa l'utente
         sleeveRequest.setUser(user);  // Associa l'utente
         // Setta altri campi di Sleeve come necessario
+
+        sleeveRequest.setCard(card);
 
 
         // Salva la sleeve

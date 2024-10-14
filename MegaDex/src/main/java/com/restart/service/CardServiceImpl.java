@@ -1,6 +1,7 @@
 package com.restart.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,10 @@ public class CardServiceImpl implements CardService{
 	@Override
 	public List<Card> getCardsBySet(String name) {
 		return dao.findBySet(name);
+	}
+
+	public Optional<Card> getCardById(String id) {
+		return dao.findById(id);
 	}
 
 

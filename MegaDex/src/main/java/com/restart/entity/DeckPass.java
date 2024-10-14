@@ -10,36 +10,39 @@ import java.util.List;
 @Setter
 public class DeckPass {
     private Integer cardExcess;
-    private String regulationMark;
-    private List<Card> tooMany;
-    private List<Card> standardFormat;
-    private List<Card> expandedFormat;
-    private List<Card> unlimitedFormat;
+    private List<String> regulationMarks;
+    private List<String> tooMany;
+    private List<Card> nLStandardFormat;
+    private List<Card> nLExpandedFormat;
+    private List<Card> nLUnlimitedFormat;
 
     public DeckPass() {
         this.tooMany = new ArrayList<>();
-        this.standardFormat = new ArrayList<>();
-        this.expandedFormat = new ArrayList<>();
+        this.nLStandardFormat = new ArrayList<>();
+        this.nLExpandedFormat = new ArrayList<>();
+        this.nLUnlimitedFormat = new ArrayList<>();
+        this.regulationMarks = new ArrayList<>();
     }
 
-    public void addTooMany(Card carta) {
-        this.tooMany.add(carta);
+    public void addTooMany(String card) {
+        this.tooMany.add(card);
     }
 
     public void quantityBalancing(Integer deckQuantity) {
-        this.cardExcess = 60-deckQuantity;
+        this.cardExcess = deckQuantity-60;
     }
 
     public void addStandardFormat(Card card) {
-        this.standardFormat.add(card);
+        this.nLStandardFormat.add(card);
     }
 
     public void addExpandedFormat(Card card) {
-        this.expandedFormat.add(card);
+        this.nLExpandedFormat.add(card);
     }
 
     public void addUnlimitedFormat(Card card) {
-        this.unlimitedFormat.add(card);
+        this.nLUnlimitedFormat.add(card);
     }
+    public void addRegulationMark(String regulationMark){ this.regulationMarks.add(regulationMark);}
 
 }

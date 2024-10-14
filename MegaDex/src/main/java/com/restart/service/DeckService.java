@@ -7,9 +7,7 @@ import com.restart.entity.Deck;
 import com.restart.entity.DeckPass;
 
 public interface DeckService {
-	CompletableFuture<DeckPass> validateDeckAsync(Deck deck);
 	List<Deck> getDecks();
-	
 	List<Deck> getDecksByName(String name);
 	
 }

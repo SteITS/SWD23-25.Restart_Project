@@ -19,15 +19,6 @@ public class DeckServiceImpl implements DeckService{
 	private SlotServiceImpl slotService;
 
 	@Override
-	@Async
-	public CompletableFuture<DeckPass> validateDeckAsync(Deck deck) {
-		List<Slot> slots = deck.getSlots();
-		DeckPass result = slotService.validateSlots(slots);
-		return CompletableFuture.completedFuture(result);
-	}
-
-
-	@Override
 	public List<Deck> getDecks() {
 		return deckRepo.findAll();
 	}
