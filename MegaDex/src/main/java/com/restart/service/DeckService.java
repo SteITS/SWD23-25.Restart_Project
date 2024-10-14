@@ -1,11 +1,12 @@
 package com.restart.service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.restart.entity.Deck;
+import com.restart.entity.DeckPass;
 
-public interface DeckService {
-	
+public interface DeckService {	
 	//Method to obtain a list of all the decks
 	List<Deck> getDecks();
 	

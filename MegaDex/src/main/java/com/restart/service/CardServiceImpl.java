@@ -2,8 +2,8 @@ package com.restart.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -62,7 +62,6 @@ public class CardServiceImpl implements CardService{
 	    } else {
 	        sort = Sort.by(Sort.Order.desc(orderBy).ignoreCase()); // Case-insensitive ordering
 	    }
-
 	    // Defines pagination and sorting for the query (zero-based page index)
 	    Pageable pageable = PageRequest.of(page - 1, page_size, sort); // Pageable with sorting
 	    // Executes the query with the specifications, pagination, and sorting
@@ -75,5 +74,8 @@ public class CardServiceImpl implements CardService{
 	        cardPage.getTotalPages(),          // Total number of pages
 	        cardPage.getTotalElements()        // Total number of items
 	    );
+	}
+  public Optional<Card> getCardById(String id) {
+		return dao.findById(id);
 	}
 }
