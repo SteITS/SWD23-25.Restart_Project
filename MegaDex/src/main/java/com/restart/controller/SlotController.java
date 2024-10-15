@@ -24,7 +24,7 @@ public class SlotController {
     @Autowired
     private CardServiceImpl cardService;
 
-    @PostMapping("/validateSlots")
+    @PostMapping("/deb/validateSlots")
     public DeckPass validateDeck(@RequestBody List<Slot> slots) {
         for(Slot slot : slots) {
             slot.setCard(cardService.getCardById(slot.getId().getIdCard())

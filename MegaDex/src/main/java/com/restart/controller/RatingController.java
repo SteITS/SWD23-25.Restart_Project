@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ratings")
+@RequestMapping("/api")
 public class RatingController {
 
     @Autowired
     private RatingService ratingService;
 
     // Get all ratings
-    @GetMapping
+    @GetMapping("/deb/ratings")
     public List<Rating> getAllRatings() {
         return ratingService.getAllRatings();
     }

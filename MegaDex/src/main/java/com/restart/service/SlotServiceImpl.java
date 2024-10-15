@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 @Service
 public class SlotServiceImpl implements SlotService {
+
     public DeckPass validateSlots(List<Slot> slots) {
         DeckPass result = new DeckPass();
         ObjectMapper objectMapper = new ObjectMapper();
