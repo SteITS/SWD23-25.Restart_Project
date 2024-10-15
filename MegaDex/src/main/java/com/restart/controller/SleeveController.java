@@ -26,7 +26,7 @@ public class SleeveController {
         private SleeveServiceImpl sleeveService;
 
 
-    @PostMapping("/auth/addsSleeve")
+    @PostMapping("/auth/updateSleeve")
     public ResponseEntity<Sleeve> updateSleeve(@RequestBody Sleeve sleeveRequest) {
         // Recupera l'utente dal database usando l'ID passato nella richiesta
         //User user = userService.findUserById(sleeveRequest.getId().getIdUser())
