@@ -22,19 +22,19 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping("usert")
+    @GetMapping("deb/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("usermail")
+    @GetMapping("deb/usermail")
     public ResponseEntity<String> getCurrentUserEmail() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserEmail = authentication.getName();
         return ResponseEntity.ok(currentUserEmail);
     }
     
-    @GetMapping("userid")
+    @GetMapping("deb/userid")
     public ResponseEntity<Integer> getCurrentUserId() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentUserEmail = authentication.getName();

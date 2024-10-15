@@ -26,41 +26,58 @@ public class SleeveController {
         private SleeveServiceImpl sleeveService;
 
 
-    @PostMapping("/addsSleeve")
-    public ResponseEntity<Sleeve> addSleeve(@RequestBody Sleeve sleeveRequest) {
+    @PostMapping("/auth/addsSleeve")
+    public ResponseEntity<Sleeve> updateSleeve(@RequestBody Sleeve sleeveRequest) {
         // Recupera l'utente dal database usando l'ID passato nella richiesta
+        //User user = userService.findUserById(sleeveRequest.getId().getIdUser())
+        //        .orElseThrow(() -> new RuntimeException("User not found with ID: " + sleeveRequest.getId().getIdUser()));
 
-        User user = userService.findUserById(sleeveRequest.getId().getIdUser())
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + sleeveRequest.getId().getIdUser()));
+        // Recupera l'utente autenticato
+        User user = userService.getAuthenticatedUser();
 
         Card card = cardService.getCardById(sleeveRequest.getId().getIdCard())
                 .orElseThrow(() -> new RuntimeException("Card not found with ID: " + sleeveRequest.getId().getIdUser()));
 
 
-        // Crea la nuova Sleeve e associa l'utente
-        sleeveRequest.setUser(user);  // Associa l'utente
-        // Setta altri campi di Sleeve come necessario
-
+        // associa carta e utente
+        sleeveRequest.setUser(user);
+        sleeveRequest.getId().setIdUser(user.getId());
         sleeveRequest.setCard(card);
 
 
         // Salva la sleeve
+        if(sleeveRequest.getQuantity()!=0){
         Sleeve savedSleeve = sleeveService.saveSleeve(sleeveRequest);
         return ResponseEntity.ok(savedSleeve);
+        }
+
+        else {
+            sleeveService.removeSleeve(sleeveRequest);
+            return ResponseEntity.ok(sleeveRequest);
+        }
 
 }
 
-    @PostMapping("/removeSleeve")
+    @PostMapping("/auth/removeSleeve")
     public ResponseEntity<String> removeSleeve(@RequestBody Sleeve sleeveRequest){
         // Recupera l'utente dal database usando l'ID passato nella richiesta
+        //User user = userService.findUserById(sleeveRequest.getId().getIdUser())
+        //        .orElseThrow(() -> new RuntimeException("User not found with ID: " + sleeveRequest.getId().getIdUser()));
 
-        User user = userService.findUserById(sleeveRequest.getId().getIdUser())
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + sleeveRequest.getId().getIdUser()));
+        // Recupera l'utente autenticato
+        User user = userService.getAuthenticatedUser();
+        Card card = cardService.getCardById(sleeveRequest.getId().getIdCard())
+                .orElseThrow(() -> new RuntimeException("Card not found with ID: " + sleeveRequest.getId().getIdUser()));
+
+        // associa carta e utente
+        sleeveRequest.setUser(user);
+        sleeveRequest.getId().setIdUser(user.getId());
+        sleeveRequest.setCard(card);
 
         // rimuove la sleeve
         try {
             sleeveService.removeSleeve(sleeveRequest);
-            return ResponseEntity.ok("Risorsa eliminata con successo");
+            return ResponseEntity.ok("Carte rimosse con successo");
         } catch (Exception e) {
             return ResponseEntity.noContent().build();
         }

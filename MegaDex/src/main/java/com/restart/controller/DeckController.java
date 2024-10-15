@@ -32,7 +32,7 @@ public class DeckController {
   @Autowired
   private CardServiceImpl cardService;
   
-	@PostMapping("/addDeck")
+	@PostMapping("/deb/addDeck")
 	public ResponseEntity<Deck> addDeck(@RequestBody Deck deck){
 		
 		//Gets the user from the database through the id sent with the request
@@ -47,7 +47,7 @@ public class DeckController {
 		return ResponseEntity.ok(newDeck);
 	}
 
-	@PostMapping("/removeDeck")
+	@PostMapping("/deb/removeDeck")
 	public ResponseEntity<String> removeDeck(@RequestBody Deck deck){
 		
 		//Removes the deck
@@ -59,7 +59,7 @@ public class DeckController {
 		}
 	}
   
-	@PostMapping("/validateDeck")
+	@PostMapping("/deb/validateDeck")
     public DeckPass validateDeck(@RequestBody List<Slot> deck) {
       for(Slot slot : deck) {
             slot.setCard(cardService.getCardById(slot.getId().getIdCard())
