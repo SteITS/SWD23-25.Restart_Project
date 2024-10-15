@@ -31,10 +31,17 @@ public class DeckServiceImpl implements DeckService{
 		return deckRepo.save(deck);
 	}
 
-	//Implementations of the method to remove a deck from the database
+	//Implementation of the method to remove a deck from the database
 	@Override
 	public void removeDeck(Deck deck) {
 		deckRepo.delete(deck);
+	}
+	
+	//Implementation of the method to find a deck with the id
+	@Override
+	public Deck getDeckById(Integer id) {
+		deckRepo.getReferenceById(id);
+		return null;
 	}
 	
 
