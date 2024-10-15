@@ -18,6 +18,7 @@ import com.restart.service.DeckServiceImpl;
 import com.restart.service.UserServiceImpl;
 import com.restart.service.CardServiceImpl;
 import com.restart.service.SlotServiceImpl;
+import com.restart.service.UserService;
 
 @RestController
 @RequestMapping("/api")
@@ -32,12 +33,15 @@ public class DeckController {
   @Autowired
   private CardServiceImpl cardService;
   
-	@PostMapping("/deb/addDeck")
+	@PostMapping("/auth/addDeck")
 	public ResponseEntity<Deck> addDeck(@RequestBody Deck deck){
 		
 		//Gets the user from the database through the id sent with the request
+		/*
 		User user = userService.findUserById(deck.getUser().getId())
 				.orElseThrow(() -> new RuntimeException("User not found with ID: " + deck.getUser().getId()));
+				*/
+		User user = userService.getAuthenticatedUser();
 		
 		//Creates the new deck and sets the user associated to the deck
 		deck.setUser(user);
@@ -46,6 +50,7 @@ public class DeckController {
 		Deck newDeck = deckService.saveDeck(deck);
 		return ResponseEntity.ok(newDeck);
 	}
+	
 
 	@PostMapping("/deb/removeDeck")
 	public ResponseEntity<String> removeDeck(@RequestBody Deck deck){
