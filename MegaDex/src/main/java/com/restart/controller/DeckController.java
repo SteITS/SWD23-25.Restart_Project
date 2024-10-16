@@ -26,8 +26,10 @@ public class DeckController {
 		
 		//Gets the user from the database through the id sent with the request
 		User user = userService.findUserById(deck.getUser().getId())
-				.orElseThrow(() -> new RuntimeException("User not found with ID: " + deck.getUser().getId()));
+						.orElseThrow(() -> new RuntimeException("User not found with ID: " + deck.getUser().getId()));
 		
+
+
 		//Creates the new deck and sets the user associated to the deck
 		deck.setUser(user);
 		

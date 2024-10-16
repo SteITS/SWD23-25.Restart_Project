@@ -1,6 +1,7 @@
 package com.restart.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.restart.entity.Deck;
 
@@ -13,7 +14,7 @@ public interface DeckService {
 	List<Deck> getDecksByName(String name);
 	
 	//Method to obtain a specific deck by id
-	Deck getDeckById(Integer id);
+	Optional<Deck> getDeckById(Integer id);
 	
 	//Method to save a deck
 	Deck saveDeck(Deck deck);

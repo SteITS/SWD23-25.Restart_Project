@@ -1,6 +1,7 @@
 package com.restart.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,8 @@ public class DeckServiceImpl implements DeckService{
 	
 	//Implementation of the method to find a deck with the id
 	@Override
-	public Deck getDeckById(Integer id) {
-		deckRepo.getReferenceById(id);
-		return null;
+	public Optional<Deck> getDeckById(Integer id) {
+		return deckRepo.findById(id);
 	}
 	
 
