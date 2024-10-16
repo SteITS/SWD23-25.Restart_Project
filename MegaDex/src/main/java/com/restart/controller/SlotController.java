@@ -1,23 +1,24 @@
 package com.restart.controller;
 
+import java.util.List;
 import com.restart.entity.Card;
 import com.restart.entity.Deck;
+import com.restart.entity.DeckPass;
+import com.restart.entity.Slot;
 import com.restart.service.CardServiceImpl;
+import com.restart.service.SlotServiceImpl;
 import com.restart.service.DeckServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.restart.entity.Slot;
-import com.restart.service.SlotServiceImpl;
 
-import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class SlotController {
 	
 	@Autowired
@@ -84,4 +85,13 @@ public class SlotController {
 	return ResponseEntity.ok(slotsRequest);
 	}
 	
+  @PostMapping("/deb/validateSlots")
+    public DeckPass validateDeck(@RequestBody List<Slot> slots) {
+        for(Slot slot : slots) {
+            slot.setCard(cardService.getCardById(slot.getId().getIdCard())
+                    .orElseThrow(() -> new RuntimeException("Card not found with ID: " + slot.getId().getIdCard())));
+        }
+        return slotService.validateSlots(slots);
+    }
+
 }

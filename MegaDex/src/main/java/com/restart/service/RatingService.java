@@ -1,19 +1,14 @@
 package com.restart.service;
 
 import com.restart.entity.Rating;
-import com.restart.repository.RatingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class RatingService {
+public interface RatingService {
+    List<Rating> getAllRatings();
+    Rating saveRating(Rating rating);
+    void removeRating(Rating rating);
 
-    @Autowired
-    private RatingRepository ratingRepository;
-
-    public List<Rating> getAllRatings() {
-        return ratingRepository.findAll();
-    }
 }
+
+

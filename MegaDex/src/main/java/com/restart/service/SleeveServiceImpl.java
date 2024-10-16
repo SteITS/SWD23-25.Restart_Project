@@ -24,7 +24,7 @@ public class SleeveServiceImpl implements SleeveService {
 
     @Override
     public void removeSleeve(Sleeve sleeve) {
-         dao.delete(sleeve);
+         dao.deleteById(sleeve.getId());
     }
 
 }

@@ -1,21 +1,31 @@
 package com.restart.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
+import java.util.concurrent.CompletableFuture;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restart.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.restart.entity.Deck;
 import com.restart.repository.DeckRepository;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 @Service
 public class DeckServiceImpl implements DeckService{
 
 	@Autowired
 	private DeckRepository deckRepo;
-	
 	//Implementation of the method to get all the decks from the database
+
+	@Override
+	public Optional<Deck> getDeckById(int id) {
+		return deckRepo.findById(id);
+	}
+
 	@Override
 	public List<Deck> getDecks() {
 		return deckRepo.findAll();
