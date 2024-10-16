@@ -12,18 +12,23 @@ import lombok.Setter;
 @Table(name = "sleeves")
 
 public class Sleeve {
+	
+	//Id della sleeve generato con la classe SleeveId
     @EmbeddedId
     private SleeveId id;
 
+    //Numero che indica la quantità di carte inserite nella sleeve
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    //Oggetto user a cui è associata la sleeve
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idUser")
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
     private User user;
 
+    //Oggetto carta associata alla sleeve
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idCard")

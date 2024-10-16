@@ -13,15 +13,19 @@ import jakarta.persistence.Table;
 @Table(name = "supertypes")
 public class Supertype {
 
+	//Id dell'oggetto
 	@Id
     private int id;
 
+	//Nome del supertipo 
     private String name;
 
+    //Lista di carte associate allo stesso supertipo
     @OneToMany(mappedBy = "supertype")
     @JsonBackReference
     private List<Card> cards;
 
+    //Metodi getter e setter
 	public String getName() {
 		return name;
 	}

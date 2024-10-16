@@ -13,5 +13,6 @@ public interface SlotService {
 	Slot addSlot(Slot slot);
 	
 	void removeSlot(Slot slot);
-  DeckPass validateSlots(List<Slot> slots);
+	
+	DeckPass validateSlots(List<Slot> slots);
 }

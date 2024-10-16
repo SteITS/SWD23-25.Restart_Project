@@ -19,26 +19,32 @@ public class SlotServiceImpl implements SlotService {
     @Autowired
     private SlotRepository slotDao;
 
+    // Recupera tutti gli slot dal repository
     @Override
     public List<Slot> getSlot() {
-      return slotDao.findAll();
+        return slotDao.findAll();
     }
 
+    // Salva un nuovo slot nel repository
     @Override
     public Slot addSlot(Slot slot) {
-      return slotDao.save(slot);
+        return slotDao.save(slot);
     }
 
+    // Elimina uno slot dal repository
     @Override
     public void removeSlot(Slot slot) {
-      slotDao.delete(slot);		
+        slotDao.delete(slot);
     }
-  
-  public DeckPass validateSlots(List<Slot> slots) {
+
+    //Metodo per eseguire la validazione degli slot delle carte dentro un mazzo
+    public DeckPass validateSlots(List<Slot> slots) {
+        // Oggetto di risultato per la convalida del mazzo
         DeckPass result = new DeckPass();
         ObjectMapper objectMapper = new ObjectMapper();
         int deckSize = 0;
 
+        // Mappa per contare le copie di ogni carta
         Map<String, Integer> cardCount = new HashMap<>();
 
         for (Slot slot : slots) {
@@ -46,43 +52,51 @@ public class SlotServiceImpl implements SlotService {
             Card card = slot.getCard();
             String legalities = card.getLegalities();
 
-            //controllo ban nei formati
-            try {JsonNode legalitiesNode = objectMapper.readTree(legalities);
+            // Controllo ban nei formati
+            try {
+                JsonNode legalitiesNode = objectMapper.readTree(legalities);
                 String unlimitedLegality = legalitiesNode.get("unlimited").asText();
                 if (unlimitedLegality.equals("Banned")) {
                     result.addUnlimitedFormat(card);
-                }} catch (Exception e) {
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            try{JsonNode legalitiesNode = objectMapper.readTree(legalities);
+            try {
+                JsonNode legalitiesNode = objectMapper.readTree(legalities);
                 String standardLegality = legalitiesNode.get("standard").asText();
                 if (standardLegality.equals("Banned")) {
                     result.addStandardFormat(card);
-                }} catch(Exception e){e.printStackTrace();}
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-            try{JsonNode legalitiesNode = objectMapper.readTree(legalities);
+            try {
+                JsonNode legalitiesNode = objectMapper.readTree(legalities);
                 String expandedLegality = legalitiesNode.get("expanded").asText();
                 if (expandedLegality.equals("Banned")) {
                     result.addExpandedFormat(card);
-                }} catch(Exception e){e.printStackTrace();}
-
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             // Formato del torneo
-            if(!result.getRegulationMarks().contains(card.getRegulation_mark()) && card.getRegulationMark()!=null){
+            if (!result.getRegulationMarks().contains(card.getRegulation_mark()) && card.getRegulationMark() != null) {
                 result.addRegulationMark(card.getRegulation_mark());
             }
 
-
-            //Limite massimo di copie per carta
+            // Limite massimo di copie per carta
             String cardName = card.getName();
-            for(Subtype subtype : card.getSubtypes()){
+            for (Subtype subtype : card.getSubtypes()) {
                 if (!subtype.getName().equals("Energy")) { // Escludi le carte Energia base
                     cardCount.put(cardName, cardCount.getOrDefault(cardName, 0) + slot.getQuantity());
                 }
             }
-
         }
+
         for (Map.Entry<String, Integer> entry : cardCount.entrySet()) {
             if (entry.getValue() > 4) {
                 for (Slot slot : slots) {

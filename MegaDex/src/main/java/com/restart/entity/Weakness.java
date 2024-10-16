@@ -14,18 +14,24 @@ import jakarta.persistence.Table;
 @Table(name = "weaknesses")
 public class Weakness {
 	
+	//Id dell'oggetto
 	@Id
 	@Column(name = "id")
 	private int id;
 	
+	//Stringa del tipo a cui è debole
 	private String type;
 	
+	//Valore della debolezza
 	private String value;
 
+	//Set di carte legate alla stessa debolezza
 	@ManyToMany(mappedBy="weaknesses")
 	@JsonBackReference
 	private Set<Card> cards;
 	
+	
+	//Metodi getter e setter
 	public String getText() {
 		return type;
 	}

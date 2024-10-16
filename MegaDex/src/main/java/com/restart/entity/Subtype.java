@@ -15,16 +15,21 @@ import jakarta.persistence.Table;
 @Table(name = "subtypes")
 public class Subtype {
 
+	//Id dell'oggetto
 	@Id
 	@Column(name = "id",nullable = false, length = 50)
 	private int id;
+	
+	//Nome del sottotipo
 	@Column(name = "name", length = 50)
 	private String name;
 
+	//Set di carte associate allo stesso sottotipo
 	@ManyToMany(mappedBy="subtypes",fetch = FetchType.LAZY)
 	@JsonBackReference
 	private Set<Card> cards;
 	
+	//Metodi getter e setter
 	public String getName() {
 		return name;
 	}

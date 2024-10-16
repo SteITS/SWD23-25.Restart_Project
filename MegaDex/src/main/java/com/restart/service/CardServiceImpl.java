@@ -3,7 +3,6 @@ package com.restart.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,66 +16,67 @@ import com.restart.dto.CardDto;
 import com.restart.entity.Card;
 import com.restart.repository.CardRepository;
 
-//Implementation of the CardService interface that handles the logic
 @Service
-public class CardServiceImpl implements CardService{
+public class CardServiceImpl implements CardService {
 
-	@Autowired
-	private CardRepository dao;
-	
-	private static final int page_size = 100; //numero di carte per pagina
+    @Autowired
+    private CardRepository dao;
 
-	
+    private static final int PAGE_SIZE = 100;  // Dimensione pagina per la ricerca filtrata (modificabile)
 
-	public CardDto getFilteredCards(String Id, String name, String supertype, String type, String subtype, String set, int page, String orderBy, String direction) {
-		// Builds dynamic filtering criteria using JPA Specifications
-	    Specification<Card> spec = (root, query, cb) -> {
-	        List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
+    //Metodo per ricercare tutte le carte secondo uno o più specifici filtri
+    public CardDto getFilteredCards(String id, String name, String supertype, String type, String subtype, String set, int page, String orderBy, String direction) {
+        // Specifica per la creazione di un filtro di ricerca JPA
+        Specification<Card> spec = (root, query, cb) -> {
+            List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
 
-	        if (Id != null) {
-	            predicates.add(cb.equal(root.get("id"), Id));
-	        }
-	        if (name != null) {
-	            predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
-	        }
-	        if (supertype != null) {
-	            predicates.add(cb.equal(cb.lower(root.join("supertype").get("name")), supertype.toLowerCase()));
-	        }
-	        if (type != null) {
-	            predicates.add(cb.equal(cb.lower(root.join("types").get("name")), type.toLowerCase()));
-	        }
-	        if (subtype != null) {
-	            predicates.add(cb.equal(cb.lower(root.join("subtypes").get("name")), subtype.toLowerCase()));
-	        }
-	        if (set != null) {
-	            predicates.add(cb.equal(cb.lower(root.get("set")), set.toLowerCase()));
-	        }
+            if (id != null) {
+                predicates.add(cb.equal(root.get("id"), id));
+            }
+            if (name != null) {
+                predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+            if (supertype != null) {
+                predicates.add(cb.equal(cb.lower(root.join("supertype").get("name")), supertype.toLowerCase()));
+            }
+            if (type != null) {
+                predicates.add(cb.equal(cb.lower(root.join("types").get("name")), type.toLowerCase()));
+            }
+            if (subtype != null) {
+                predicates.add(cb.equal(cb.lower(root.join("subtypes").get("name")), subtype.toLowerCase()));
+            }
+            if (set != null) {
+                predicates.add(cb.equal(cb.lower(root.get("set")), set.toLowerCase()));
+            }
 
-	        return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
-	    };
+            return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
+        };
 
-	    // Sort order logic
-	    Sort sort;
-	    if (direction.equalsIgnoreCase("asc")) {
-	        sort = Sort.by(Sort.Order.asc(orderBy).ignoreCase()); // Case-insensitive ordering
-	    } else {
-	        sort = Sort.by(Sort.Order.desc(orderBy).ignoreCase()); // Case-insensitive ordering
-	    }
-	    // Defines pagination and sorting for the query (zero-based page index)
-	    Pageable pageable = PageRequest.of(page - 1, page_size, sort); // Pageable with sorting
-	    // Executes the query with the specifications, pagination, and sorting
-	    Page<Card> cardPage = dao.findAll(spec, pageable);
+        // Ordinamento della pagina dei risultati
+        Sort sort;
+        if (direction.equalsIgnoreCase("asc")) {
+            sort = Sort.by(Sort.Order.asc(orderBy).ignoreCase());
+        } else {
+            sort = Sort.by(Sort.Order.desc(orderBy).ignoreCase());
+        }
 
-	    // Creates and returns a CardDto object that contains the filtered cards and pagination info
-	    return new CardDto(
-	        cardPage.getContent(),             // List of filtered cards
-	        page,                              // Current page number
-	        cardPage.getTotalPages(),          // Total number of pages
-	        cardPage.getTotalElements()        // Total number of items
-	    );
-	}
-  public Optional<Card> getCardById(String id) {
-		return dao.findById(id);
-	}
+        // Configurazione della paginazione
+        Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE, sort);  // Pagina 0-based
 
+        // Recupera la pagina di carte filtrate
+        Page<Card> cardPage = dao.findAll(spec, pageable);
+
+        // Crea e restituisce un oggetto CardDto con i risultati e le informazioni di paginazione
+        return new CardDto(
+                cardPage.getContent(),
+                page,
+                cardPage.getTotalPages(),
+                cardPage.getTotalElements()
+        );
+    }
+
+    // Recupera una carta specifica tramite il suo ID
+    public Optional<Card> getCardById(String id) {
+        return dao.findById(id);
+    }
 }
