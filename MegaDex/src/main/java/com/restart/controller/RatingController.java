@@ -21,6 +21,12 @@ public class RatingController {
     @Autowired
     private DeckServiceImpl deckService;
 
+    //Restituisce i rating di un deck
+    @PostMapping("/deb/getRatingsByDeck")
+    public List<Rating> getRatingsByDeckId(@RequestBody Deck deck) {
+        return ratingService.getRatingsByDeckId(deck.getId());
+    }
+
     //Recupera tutti i rating
     @PostMapping("/deb/ratings")
     public List<Rating> getAllRatings() {

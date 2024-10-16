@@ -3,6 +3,7 @@ package com.restart.controller;
 import com.restart.dto.UserDto;
 import com.restart.entity.User;
 import com.restart.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,12 @@ public class AuthController {
         UserDto user = new UserDto();
         model.addAttribute("user", user);
         return "register";
+    }
+
+    //Mostra che l'autenticazione è avvenuta con successo
+    @GetMapping("/success")
+    public ResponseEntity<User> showSuccessMessage(){
+        return ResponseEntity.ok(userService.getAuthenticatedUser());
     }
 
     // Metodo per visualizzare il form di registrazione utente

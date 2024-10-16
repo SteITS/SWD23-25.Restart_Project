@@ -35,11 +35,12 @@ public class SpringSecurity {
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
+                                .requestMatchers("/success").hasAnyRole("ADMIN", "USER")
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users", true)
+                                .defaultSuccessUrl("/success", true)
                                 .permitAll()
                 ).logout(
                         logout -> logout
