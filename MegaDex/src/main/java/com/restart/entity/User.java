@@ -1,16 +1,12 @@
 package com.restart.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,30 +18,34 @@ import java.util.List;
 @Table(name="users")
 public class User
 {
-    private static final long serialVersionUID = 1L;
-
+	//Id della classe user
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    //Nome dell'utente 
     @Column(nullable=false)
     private String name;
 
+    //Email dell'utente
     @Column(nullable=false, unique=true)
     private String email;
 
+    //Password dell'utente
     @JsonIgnore
     @Column(nullable=false)
     private String password;
     
+    //Lista di deck legati all'utente
     @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Deck> decks;
 
-
+    //Lista delle carte della collezione privata dell'utente
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sleeve> Sleeves;
 
+    //Lista di ruoli associati all'utente
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(

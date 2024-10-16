@@ -14,16 +14,20 @@ import jakarta.persistence.Table;
 @Table(name = "types")
 public class Type {
 
+	//Id della classe
 	@Id
 	@Column(name = "id")
 	private int id;
 	
+	//Nome del tipo elementale
 	private String name;
 
+	//Set di carte legate al singolo record elemento
 	@ManyToMany(mappedBy="types")
 	@JsonBackReference
 	private Set<Card> cards;
 	
+	//Metodi getter e setter
 	public String getName() {
 		return name;
 	}

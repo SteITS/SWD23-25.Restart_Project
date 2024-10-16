@@ -12,20 +12,26 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="abilities")
 public class Ability {
-
+	
+	//Id dell'oggetto
 	@Id
 	private int id;
 	
+	//Nome dell'abilità
 	private String name;
 	
+	//Testo descrittivo dell'abilità
 	private String text;
 	
+	//Tipo dell'abilità
 	private String type;
 
+	//Set di carte che possiedono la stessa abilità
 	@ManyToMany(mappedBy="abilities")
 	@JsonBackReference
 	private Set<Card> cards;
 	
+	//Metodi getter e setter
 	public int getId() {
 		return id;
 	}

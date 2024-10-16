@@ -19,64 +19,96 @@ import jakarta.persistence.Table;
 @Table(name = "cards")
 public class Card {
 
+	//Id dell'oggetto
 	@Id
 	@Column(name = "id", nullable = false, length = 50)
 	private String id;
+	
+	//Set a cui appartiene la carta
 	@Column(name = "expansion", length = 50)
 	private String set;
+	
+	//Serie a cui appartiene la carta
 	@Column(name = "series", length = 50)
 	private String series;
+	
+	//Publisher della carta
 	@Column(name = "publisher", length = 10)
 	private String publisher;
+	
+	//Generazione a cui appartiene la carta
 	@Column(name = "generation", length = 15)
 	private String generation;
+	
+	//Data di rilascio della carta
 	@Column(name = "release_date", length = 50)
 	private String release_date;
+	
+	//Artista del disegno della carta
 	@Column(name = "artist", length = 50)
 	private String artist;
+	
+	//Nome della carta
 	@Column(name = "name", length = 70)
 	private String name;
 	
+	//Numero del set della carta
 	private String set_num;
 	
+	//Livello del pokemon 
 	@Column(name = "card_level", length = 5)
 	private String level;
 	
+	//Punti vita del pokemon
 	@Column(name = "hp", length = 5)
 	private String hp;
 	
+	//Nome del pokemon da cui si è evoluto
 	@Column(name = "evolves_from", length = 70)
 	private String evolves_from;
 	
+	//Nome del pokemon in cui si evolve
 	@Column(name = "evolves_to", length = 70)
 	private String evolves_to;
 	
+	//Costo di energie per far ritirare il pokemon
 	@Column(name = "retreat_cost", length = 70)
 	private String retreat_cost;
 	
+	//Costo per fare ritirare il pokemon convertito in formato simbolico
 	@Column(name = "converted_retreat_cost", length = 5)
 	private String converted_retreat_cost;
 	
+	//Rarità della carta
 	@Column(name = "rarity", length = 50)
 	private String rarity;
 	
+	//Testo descrittivo del pokemon
 	private String flavor_text;
+	
+	//Numero del pokemon nel pokedex nazionale
 	@Column(name = "national_pokedex_numbers", length = 50)
 	private String national_pokedex_numbers;
 	
+	//Regolamento della legalita della carta nei vari formati
 	@Column(name = "legalities", length = 100)
 	private String legalities;
 	
+	//Regole specifiche della carta
 	private String rules;
+	
+	//Marchio delle regole
 	@Column(name = "regulation_mark", length = 50)
 	private String regulation_mark;
 	
+	//Tratto antico del pokemon
 	@Column(name = "ancient_trait", length = 50)
 	private String ancient_trait;
 	
+	//Immagine del pokemon della carta
 	private String img;
 	
-	// Many-to-Many relationship with Attack entities (cards can have multiple attacks)
+	//Relazione Many-to-Many con l'entità Attack (Ogni carta può avere più attacchi)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_attacks",
@@ -86,7 +118,7 @@ public class Card {
 	@JsonManagedReference // Avoids infinite recursion when serializing to JSON
 	private Set<Attack> attacks;
 	
-	// Many-to-Many relationship with Ability entities (cards can have multiple abilities)
+	//Relazione Many-to-Many con l'entità Ability (Ogni carta può avere più abilità)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_abilities",
@@ -96,7 +128,7 @@ public class Card {
 	@JsonManagedReference
 	private Set<Ability> abilities;
 	
-	// Many-to-Many relationship with Weakness entities (cards can have multiple weaknesses)
+	//Relazione Many-to-Many con l'entità Weakness (Ogni carta può avere più debolezze)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_weaknesses",
@@ -105,8 +137,8 @@ public class Card {
 			)
 	@JsonManagedReference
 	private Set<Weakness> weaknesses;
-	
-	// Many-to-Many relationship with Resistance entities (cards can have multiple resistances)
+
+	//Relazione Many-to-Many con l'entità Resistance (Ogni carta può avere più resistenze)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_resistances",
@@ -116,7 +148,7 @@ public class Card {
 	@JsonManagedReference
 	private Set<Resistance> resistances;
 	
-	// Many-to-Many relationship with Type entities (cards can have multiple types)
+	//Relazione Many-to-Many con l'entità Type (Ogni carta può avere più tipi)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_types",
@@ -126,7 +158,7 @@ public class Card {
 	@JsonManagedReference
 	private Set<Type> types;
 	
-	 // Many-to-Many relationship with Subtype entities (cards can have multiple subtypes)
+	// Relazione Many-to-Many con l'entità Subtype (Ogni carta può avere più sottotipi)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "card_subtypes",
@@ -136,14 +168,14 @@ public class Card {
 	@JsonManagedReference
 	private Set<Subtype> subtypes;
 	
-	// Many-to-One relationship with Supertype entity (each card has one supertype)
+	//Relazione Many-to-One con l'entità Supertype (Ogni carta ha un solo supertipo)
 	@ManyToOne
     @JoinColumn(name = "supertype")
 	@JsonManagedReference
     private Supertype supertype;
 	
 	
-	//getters and setters
+	//Metodi getter e setter
 	public String getId() {
 		return id;
 	}

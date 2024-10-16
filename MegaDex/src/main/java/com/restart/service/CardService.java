@@ -1,7 +1,7 @@
 package com.restart.service;
 
 import com.restart.dto.CardDto;
-//Repository interface that extends JpaRepository and JpaSpecificationExecutor to allow custom query building with filtering support
+
 public interface CardService {
 
     CardDto getFilteredCards(
@@ -14,5 +14,5 @@ public interface CardService {
     		int page,
     		String orderBy,
     		String direction
-    		);	
+    );	
 }
