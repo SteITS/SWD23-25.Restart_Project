@@ -3,6 +3,7 @@ package com.restart.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -21,6 +22,11 @@ public class DeckServiceImpl implements DeckService{
 	@Autowired
 	private DeckRepository deckRepo;
 	//Implementation of the method to get all the decks from the database
+
+	@Override
+	public Optional<Deck> getDeckById(int id) {
+		return deckRepo.findById(id);
+	}
 
 	@Override
 	public List<Deck> getDecks() {

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Table(name = "ratings")
 public class Rating {
     @EmbeddedId
-    private SleeveId id;
+    private RatingId id;
 
     @Column(name = "rate")
     private Boolean rate;
