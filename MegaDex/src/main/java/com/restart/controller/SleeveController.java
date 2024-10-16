@@ -26,14 +26,11 @@ public class SleeveController {
         private SleeveServiceImpl sleeveService;
 
 
-    @PostMapping("/auth/updateSleeve")
+    //Aggiorna o rimuove una Sleeve
+        @PostMapping("/auth/updateSleeve")
     public ResponseEntity<Sleeve> updateSleeve(@RequestBody Sleeve sleeveRequest) {
-        // Recupera l'utente dal database usando l'ID passato nella richiesta
-        //User user = userService.findUserById(sleeveRequest.getId().getIdUser())
-        //        .orElseThrow(() -> new RuntimeException("User not found with ID: " + sleeveRequest.getId().getIdUser()));
-
-        // Recupera l'utente autenticato
-        User user = userService.getAuthenticatedUser();
+            // Recupera l'utente autenticato
+            User user = userService.getAuthenticatedUser();
 
         Card card = cardService.getCardById(sleeveRequest.getId().getIdCard())
                 .orElseThrow(() -> new RuntimeException("Card not found with ID: " + sleeveRequest.getId().getIdUser()));
@@ -45,25 +42,21 @@ public class SleeveController {
         sleeveRequest.setCard(card);
 
 
-        // Salva la sleeve
-        if(sleeveRequest.getQuantity()!=0){
+        // Salva la sleeve se quantity è maggiore di 0
+        if(sleeveRequest.getQuantity()>0){
         Sleeve savedSleeve = sleeveService.saveSleeve(sleeveRequest);
         return ResponseEntity.ok(savedSleeve);
         }
-
+        // Altrimenti elimina la sleeve
         else {
             sleeveService.removeSleeve(sleeveRequest);
             return ResponseEntity.ok(sleeveRequest);
         }
 
 }
-
+    //Rimuove una sleeve
     @PostMapping("/auth/removeSleeve")
     public ResponseEntity<String> removeSleeve(@RequestBody Sleeve sleeveRequest){
-        // Recupera l'utente dal database usando l'ID passato nella richiesta
-        //User user = userService.findUserById(sleeveRequest.getId().getIdUser())
-        //        .orElseThrow(() -> new RuntimeException("User not found with ID: " + sleeveRequest.getId().getIdUser()));
-
         // Recupera l'utente autenticato
         User user = userService.getAuthenticatedUser();
         Card card = cardService.getCardById(sleeveRequest.getId().getIdCard())

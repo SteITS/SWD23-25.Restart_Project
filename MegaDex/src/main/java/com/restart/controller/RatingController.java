@@ -2,7 +2,6 @@ package com.restart.controller;
 
 import com.restart.entity.*;
 import com.restart.service.DeckServiceImpl;
-import com.restart.service.RatingService;
 import com.restart.service.RatingServiceImpl;
 import com.restart.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,13 @@ public class RatingController {
     @Autowired
     private DeckServiceImpl deckService;
 
-    // Get all ratings
+    //Recupera tutti i rating
     @PostMapping("/deb/ratings")
     public List<Rating> getAllRatings() {
         return ratingService.getAllRatings();
     }
 
-    //Aggiunge un rate
+    //Aggiunge un rating
     @PostMapping("/auth/updateRating")
     ResponseEntity<Rating> updateRating(@RequestBody Rating ratingRequest) {
 
@@ -42,35 +41,26 @@ public class RatingController {
         ratingRequest.setDeck(deck);
 
 
-        // Salva il rate
-        if(ratingRequest.getRate() != null){
+        // Salva il rating
             Rating savedRating = ratingService.saveRating(ratingRequest);
             return ResponseEntity.ok(savedRating);
-        }
 
-        else {
-            ratingService.removeRating(ratingRequest);
-            return ResponseEntity.ok(ratingRequest);
-        }
     }
-
+    //Rimuove un rating
     @PostMapping("/auth/removeRating")
     public ResponseEntity<String> removeRating(@RequestBody Rating ratingRequest){
-        // Recupera l'utente dal database usando l'ID passato nella richiesta
-        //User user = userService.findUserById(ratingRequest.getId().getIdUser())
-        //        .orElseThrow(() -> new RuntimeException("User not found with ID: " + ratingRequest.getId().getIdUser()));
-
         // Recupera l'utente autenticato
         User user = userService.getAuthenticatedUser();
+        // Recupera il deck
         Deck deck = deckService.getDeckById(ratingRequest.getId().getIdDeck())
                 .orElseThrow(() -> new RuntimeException("Deck not found with ID: " + ratingRequest.getId().getIdUser()));
 
-        // associa deck e utente
+        // Associa deck e utente
         ratingRequest.setUser(user);
         ratingRequest.getId().setIdUser(user.getId());
         ratingRequest.setDeck(deck);
 
-        // rimuove il rating
+        // Rimuove il rating
         try {
             ratingService.removeRating(ratingRequest);
             return ResponseEntity.ok("Rating rimosso con successo");
