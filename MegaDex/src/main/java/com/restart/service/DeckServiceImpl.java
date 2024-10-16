@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restart.entity.*;
@@ -44,10 +42,16 @@ public class DeckServiceImpl implements DeckService{
 		return deckRepo.save(deck);
 	}
 
-	//Implementations of the method to remove a deck from the database
+	//Implementation of the method to remove a deck from the database
 	@Override
 	public void removeDeck(Deck deck) {
 		deckRepo.delete(deck);
+	}
+	
+	//Implementation of the method to find a deck with the id
+	@Override
+	public Optional<Deck> getDeckById(Integer id) {
+		return deckRepo.findById(id);
 	}
 	
 

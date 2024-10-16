@@ -7,14 +7,34 @@ import com.restart.entity.DeckPass;
 import com.restart.entity.Slot;
 import com.restart.entity.Subtype;
 import org.springframework.stereotype.Service;
-
+import com.restart.repository.SlotRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 public class SlotServiceImpl implements SlotService {
 
-    public DeckPass validateSlots(List<Slot> slots) {
+    @Autowired
+    private SlotRepository slotDao;
+
+    @Override
+    public List<Slot> getSlot() {
+      return slotDao.findAll();
+    }
+
+    @Override
+    public Slot addSlot(Slot slot) {
+      return slotDao.save(slot);
+    }
+
+    @Override
+    public void removeSlot(Slot slot) {
+      slotDao.delete(slot);		
+    }
+  
+  public DeckPass validateSlots(List<Slot> slots) {
         DeckPass result = new DeckPass();
         ObjectMapper objectMapper = new ObjectMapper();
         int deckSize = 0;

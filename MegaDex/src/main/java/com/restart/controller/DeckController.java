@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import com.restart.entity.DeckPass;
@@ -43,6 +44,8 @@ public class DeckController {
 				*/
 		User user = userService.getAuthenticatedUser();
 		
+
+
 		//Creates the new deck and sets the user associated to the deck
 		deck.setUser(user);
 		
