@@ -1,6 +1,6 @@
 package com.restart.service;
 
-import com.restart.entity.Deck;
+
 import com.restart.entity.Rating;
 import com.restart.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;

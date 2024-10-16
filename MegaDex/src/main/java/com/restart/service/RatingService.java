@@ -1,6 +1,5 @@
 package com.restart.service;
 
-import com.restart.entity.Deck;
 import com.restart.entity.Rating;
 
 import java.util.List;

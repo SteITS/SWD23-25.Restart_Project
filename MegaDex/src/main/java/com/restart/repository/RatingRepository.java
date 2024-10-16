@@ -1,6 +1,5 @@
 package com.restart.repository;
 
-import com.restart.entity.Deck;
 import com.restart.entity.Rating;
 import com.restart.entity.RatingId;
 import org.springframework.data.jpa.repository.JpaRepository;

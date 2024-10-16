@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.restart.entity.Deck;
+import com.restart.entity.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.restart.repository.DeckRepository;
@@ -43,5 +45,8 @@ public class DeckServiceImpl implements DeckService {
     public Optional<Deck> getDeckById(Integer id) {
         return deckRepo.findById(id);
     }
-
+    
+    public List<Deck> getDecksByUser(User user) {
+        return deckRepo.findByUser(user);
+    }
 }

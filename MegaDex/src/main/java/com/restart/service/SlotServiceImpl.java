@@ -60,7 +60,7 @@ public class SlotServiceImpl implements SlotService {
                     result.addUnlimitedFormat(card);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
 
             try {
@@ -70,7 +70,7 @@ public class SlotServiceImpl implements SlotService {
                     result.addStandardFormat(card);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
 
             try {
@@ -80,7 +80,7 @@ public class SlotServiceImpl implements SlotService {
                     result.addExpandedFormat(card);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
 
             // Formato del torneo
