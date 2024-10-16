@@ -3,6 +3,7 @@ package com.restart.controller;
 import com.restart.dto.UserDto;
 import com.restart.entity.User;
 import com.restart.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,18 +23,19 @@ public class AuthController {
         this.userService = userService;
     }
 
-    // handler method to handle home page request
+    // Metodo per gestire la richiesta della home page
     @GetMapping("/index")
     public String home(){
         return "index";
     }
-    
+
+    // Metodo per reindirizzare alla home page
     @GetMapping("/")
     public String redirectToIndex() {
     return "redirect:/index";
 }
 
-    // handler method to handle user registration form request
+    // Metodo per visualizzare il form di registrazione utente
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         // create model object to store form data
@@ -42,7 +44,13 @@ public class AuthController {
         return "register";
     }
 
-    // handler method to handle user registration form submit request
+    //Mostra che l'autenticazione è avvenuta con successo
+    @GetMapping("/success")
+    public ResponseEntity<User> showSuccessMessage(){
+        return ResponseEntity.ok(userService.getAuthenticatedUser());
+    }
+
+    // Metodo per visualizzare il form di registrazione utente
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
@@ -63,7 +71,7 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
-    // handler method to handle list of users
+    //Metodo per visualizzare la lista degli utenti
     @GetMapping("/users")
     public String users(Model model){
         List<UserDto> users = userService.findAllUsers();
@@ -71,7 +79,7 @@ public class AuthController {
         return "users";
     }
 
-    // handler method to handle login request
+    // Metodo per gestire la richiesta della pagina di login
     @GetMapping("/login")
     public String login(){
         return "login";

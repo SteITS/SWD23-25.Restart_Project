@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restart.dto.CardDto;
 import com.restart.service.CardService;
 
-//REST controller that handles requests related to card retrieval
+// REST controller per gestire le richieste relative al recupero delle carte
 @RestController
 public class CardController {
 	@Autowired
 	private CardService service;
-	
-	//optional parameters for filters: Id,name,supertype,type,subtype,set,page,orderby,direction
-	//returns first 100 entries with or without filters applied, page parameters to scroll through
-	@GetMapping("/cards")
+
+    // Parametri opzionali per i filtri: Id, name, supertype, type, subtype, set, page, orderBy, direction
+    // Restituisce le prime 100 voci con o senza filtri applicati; i parametri 'page' permettono di scorrere tra i risultati
+    @GetMapping("/cards")
     public ResponseEntity<CardDto> getFilteredCards(
         @RequestParam(required = false) String Id,
         @RequestParam(required = false) String name,
@@ -32,11 +32,11 @@ public class CardController {
         @RequestParam(defaultValue = "Id") String orderBy,
         @RequestParam(defaultValue = "asc") String direction) 
     {
-		
-		// Calls the service to retrieve the filtered cards and pagination data
+
+        // Chiama il servizio per recuperare le carte filtrate e i dati di paginazione
         CardDto response = service.getFilteredCards(Id, name, supertype, type, subtype, set, page, orderBy, direction);
-        // Returns the response with HTTP status 200 (OK)
-        return new ResponseEntity<>(response, HttpStatus.OK); // Return the response with pagination info
+        // Restituisce la risposta con lo stato HTTP 200 (OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
 	

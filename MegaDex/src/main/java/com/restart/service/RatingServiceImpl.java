@@ -1,5 +1,6 @@
 package com.restart.service;
 
+import com.restart.entity.Deck;
 import com.restart.entity.Rating;
 import com.restart.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,13 @@ public class RatingServiceImpl implements RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
+    @Override
+    public List<Rating> getRatingsByDeckId(int deckId) {
+        return ratingRepository.findByDeckId(deckId);
+    }
     // Recupera tutti rating dal database
+
+    @Override  
     public List<Rating> getAllRatings() {
         return ratingRepository.findAll();
     }

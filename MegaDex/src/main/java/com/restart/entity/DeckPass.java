@@ -9,12 +9,12 @@ import java.util.List;
 @Getter
 @Setter
 public class DeckPass {
-    private Integer cardExcess;
-    private List<String> regulationMarks;
-    private List<String> tooMany;
-    private List<Card> nLStandardFormat;
-    private List<Card> nLExpandedFormat;
-    private List<Card> nLUnlimitedFormat;
+    private Integer cardExcess; //Numero di carte in eccesso o difetto
+    private List<String> regulationMarks; //Lista dei regulation marks
+    private List<String> tooMany; //Lista dei nomi di carte oltre il x4
+    private List<Card> nLStandardFormat; //Lista di carte bannate nel formato Standard
+    private List<Card> nLExpandedFormat; //Lista di carte bannate nel formato Expanded
+    private List<Card> nLUnlimitedFormat; //Lista di carte bannate nel formato Unlimited
 
     public DeckPass() {
         this.tooMany = new ArrayList<>();
