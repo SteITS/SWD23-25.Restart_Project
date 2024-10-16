@@ -20,7 +20,7 @@ public class RatingId implements Serializable {
     private Integer idUser;
 
     @Nationalized
-    @Column(name = "id_card", nullable = false, length = 50)
+    @Column(name = "id_deck", nullable = false, length = 50)
     private Integer idDeck;
 
     @Override
