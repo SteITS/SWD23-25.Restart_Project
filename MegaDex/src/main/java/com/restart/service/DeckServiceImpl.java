@@ -11,12 +11,16 @@ import com.restart.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.restart.repository.DeckRepository;
+import com.restart.repository.UserRepository;
+
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DeckServiceImpl implements DeckService{
 
+	@Autowired
+    private UserRepository userRepository;
 	@Autowired
 	private DeckRepository deckRepo;
 	//Implementation of the method to get all the decks from the database
@@ -41,6 +45,16 @@ public class DeckServiceImpl implements DeckService{
 	public Deck saveDeck(Deck deck) {
 		return deckRepo.save(deck);
 	}
+	
+	// New method to find a user by ID
+    public Optional<User> findUserById(int id) {
+        return userRepository.findById(id);
+    }
+	
+	//Implementation of the method to get a list of decks of a certain user
+	public List<Deck> getDecksByUser(User user) {
+        return deckRepo.findByUser(user);
+    }
 
 	//Implementation of the method to remove a deck from the database
 	@Override
