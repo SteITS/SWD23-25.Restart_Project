@@ -16,13 +16,16 @@ import java.util.List;
 @Table(name="roles")
 public class Role
 {
+	//Id dell'oggetto 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    //Nome del ruolo
     @Column(nullable=false, unique=true)
     private String name;
 
+    //Lista degli user associati allo stesso ruolo
     @ManyToMany(mappedBy="roles")
     private List<User> users;
 }

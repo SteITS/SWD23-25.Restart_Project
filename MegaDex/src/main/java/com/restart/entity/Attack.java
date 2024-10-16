@@ -15,24 +15,35 @@ import jakarta.persistence.Table;
 @Table(name="attacks")
 public class Attack {
 	
+	//Id dell'oggetto
 	@Id
 	@Column(name = "id", nullable = false, length = 50)
 	private int id;
+	
+	//Nome dell'attacco
 	@Column(name="attack_name", length = 50)
 	private String attack_name;
+	
+	//Costo in energie dell'attacco
 	@Column(name="cost", length = 100)
 	private String cost;
+	
+	//Danno dell'attacco
 	@Column(name="damage", length = 150)
 	private String damage;
 	
+	//Costo in energie dell'attacco convertito in simboli
 	private int converted_energy_cost;
 	
+	//Testo descrittivo dell'attacco
 	private String text;
 	
+	//Carte che hanno lo stesso attacco
 	@ManyToMany(mappedBy="attacks", fetch = FetchType.LAZY)
 	@JsonBackReference
 	private Set<Card> cards;
 
+	//Metodi getter e setter
 	public int getId() {
 		return id;
 	}

@@ -10,18 +10,23 @@ import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
+@SuppressWarnings("serial")
 @Getter
 @Setter
 @Embeddable
 public class SlotId implements Serializable {
-	 @Column(name = "id_deck", nullable = false)
-	 private Integer idDeck;
+	
+	//Id del deck a cui è associato lo slot
+	@Column(name = "id_deck", nullable = false)
+	private Integer idDeck;
 
-	 @Nationalized
-	 @Column(name = "id_card", nullable = false, length = 50)
-	 private String idCard;
+	//Id della carta associata allo slot inserita nel deck
+	@Nationalized
+	@Column(name = "id_card", nullable = false, length = 50)
+	private String idCard;
 
-
+	
+	//Metodo equals e hashcode per la gestione dei tipi
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

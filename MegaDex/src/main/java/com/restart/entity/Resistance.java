@@ -14,21 +14,26 @@ import jakarta.persistence.Table;
 @Table(name = "resistances")
 public class Resistance {
 	
+	//Id dell'oggetto
 	@Id
 	@Column(name = "id")
 	private int id;
 	
+	//Tipo elementale della resistenza al danno
 	private String type;
 	
+	//Valore della resistenza
 	private String value;
 
-	public String getType() {
-		return type;
-	}
-
+	//Set di carte associate alla stessa resistenza
 	@ManyToMany(mappedBy="resistances")
 	@JsonBackReference
 	private Set<Card> cards;
+
+	//Metodi getter e setter
+	public String getType() {
+		return type;
+	}
 	
 	public void setType(String type) {
 		this.type = type;
