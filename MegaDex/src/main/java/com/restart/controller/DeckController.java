@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
+
 import com.restart.entity.DeckPass;
 import com.restart.entity.Deck;
 import com.restart.entity.User;
@@ -33,6 +36,21 @@ public class DeckController {
   private SlotServiceImpl slotService;
   @Autowired
   private CardServiceImpl cardService;
+  
+  @PostMapping("/auth/decksByUser")
+  public ResponseEntity<List<Deck>> getDecksByUserId(@RequestBody Map<String, Integer> requestBody) {
+      // Extract user ID from request body
+      int userId = requestBody.get("userId");
+
+      // Find the user by ID
+      User user = userService.findUserById(userId)
+              .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+      // Fetch the decks associated with the user
+      List<Deck> decks = deckService.getDecksByUser(user);
+
+      return ResponseEntity.ok(decks);
+  }
   
 	@PostMapping("/auth/addDeck")
 	public ResponseEntity<Deck> addDeck(@RequestBody Deck deck){
