@@ -104,10 +104,41 @@ if (languageSwitch.length > 0) {
     });
 }
 
-const loginForm = document.querySelector('#login-form');
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita il comportamento predefinito di invio del form
+
+    // Cattura i dati del form
+    const form = event.target;
+    const formData = new FormData(form);
+
+    // Crea la stringa x-www-form-urlencoded
+    const urlEncodedData = new URLSearchParams(formData).toString();
+
+    // Invia i dati con una richiesta fetch POST
+    fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: urlEncodedData,
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
+
+
+
+/*const loginForm = document.querySelector('#login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission behavior
             window.location.href = 'personale.html'; // Redirect to the personal area page
         });
-    };
+    };*/

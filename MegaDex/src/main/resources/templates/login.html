@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MegaDex</title>
     <!-- Collegamento corretto al file CSS usando Thymeleaf -->
-    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 <header>
@@ -35,7 +35,7 @@
         <div id="login">
             <h1>Accedi come allenatore</h1>
             <!-- Collegamento corretto del form con Thymeleaf -->
-            <form id="login-form" th:action="@{/personale}" method="post">
+            <form id="login-form" th:action="@{/login}" method="post">
                 <label for="username">Utente:</label>
                 <input type="text" id="username" name="username" placeholder="Trainer ID" maxlength="30" required>
 
@@ -50,6 +50,6 @@
 </main>
 
 <!-- Collegamento corretto al file JavaScript usando Thymeleaf -->
-<script th:src="@{/script/login.js}" defer></script>
+<script th:src="@{/js/login.js}" defer></script>
 </body>
 </html>
