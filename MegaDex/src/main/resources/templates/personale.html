@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaDex</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+<header>
+    <img th:src="@{/media/MegaDex-17-09-2024.png}" alt="MegaDex Logo" class="logo">
+    <nav>
+        <ul>
+            <li><a th:href="@{/index}">HOME</a></li>
+            <li><a th:href="@{/deckbuilder}">DECKBUILDER</a></li>
+            <li><a th:href="@{/community}">COMMUNITY</a></li>
+            <li><a th:href="@{/login}" class="active">AREA PERSONALE</a></li>
+            <li>
+                <div id="language-switch">
+                    <button id="switch-lang">
+                        <img id="flag-image" th:src="@{/media/it.png}" alt="Language Flag" class="flag">
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="home">
+        <h1>Dati Anagrafici</h1>
+        <table>
+            <tbody>
+            <tr>
+                <td><strong>Nome Utente:</strong></td>
+                <td th:text="${user.username}">Mario90</td>
+                <td><button class="data" ><i class="bi bi-pencil-square"></i><span> Modifica</span></button></td>
+            </tr>
+            <tr>
+                <td><strong>Email:</strong></td>
+                <td th:text="${user.email}">mario.rossi@example.com</td>
+                <td><button class="data" ><i class="bi bi-pencil-square"></i><span> Modifica</span></button></td>
+            </tr>
+            <tr>
+                <td><strong>Nome Completo:</strong></td>
+                <td th:text="${user.fullName}">Mario Rossi</td>
+                <td><button class="data" ><i class="bi bi-pencil-square"></i><span> Modifica</span></button></td>
+            </tr>
+            <tr>
+                <td><strong>Data di Nascita:</strong></td>
+                <td th:text="${user.birthDate}">01/01/1990</td>
+                <td><button class="data" ><i class="bi bi-pencil-square"></i><span> Modifica</span></button></td>
+            </tr>
+            <tr>
+                <td><strong>Luogo di Nascita:</strong></td>
+                <td th:text="${user.birthPlace}">Roma</td>
+                <td><button class="data" ><i class="bi bi-pencil-square"></i><span> Modifica</span></button></td>
+            </tr>
+            <tr>
+                <td><strong>Numero di Telefono:</strong></td>
+                <td th:text="${user.phoneNumber}">+39 320 123 4567</td>
+                <td><button class="data"><i class="bi bi-pencil-square"></i><span> Modifica</span></button></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="deck-list">
+        <h1>Mazzi personali</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome Mazzo</th>
+                <th>Tipi</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="deck : ${user.decks}" class="deck-row" th:data-deck="${deck.name}">
+                <td th:text="${deck.name}">Dragofiamma</td>
+                <td th:text="${deck.types}">Fuoco, Drago</td>
+                <td class="button-group">
+                    <button class="icon-btn" th:onclick="'publishDeck(' + deck.name + ')'"><i class="bi bi-share-fill"></i><span>Pubblica</span></button>
+                    <button class="icon-btn" th:onclick="'editDeck(' + deck.name + ')'"><i class="bi bi-pencil-square"></i><span> Modifica</span></button>
+                    <button class="icon-btn" th:onclick="'deleteDeck(' + deck.name + ')'"><i class="bi bi-trash-fill"></i><span> Cancella</span></button>
+                </td>
+            </tr>
+            <tr th:each="deck : ${user.decks}" th:data-deck="'details-' + ${deck.name}" class="details-row" style="display: none;">
+                <td colspan="3">
+                    <div class="card-container-js" th:id="'details-' + ${deck.name}">
+                        <!-- Le carte del mazzo verranno aggiunte dinamicamente qui -->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<script th:src="@{/script/personale.js}" defer></script>
+</body>
+</html>

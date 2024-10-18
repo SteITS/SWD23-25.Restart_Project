@@ -23,7 +23,101 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
                 </li>
-            </ul>
+            </ul><!DOCTYPE html>
+            <html lang="it" xmlns:th="http://www.thymeleaf.org">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>MegaDex</title>
+                <link rel="stylesheet" type="text/css" href="styles/style.css">
+            </head>
+            <body>
+            <header>
+                <img th:src="@{/media/MegaDex-17-09-2024.png}" alt="PokemonDB Logo" class="logo">
+                <nav>
+                    <ul>
+                        <li><a th:href="@{/index}" class="active">HOME</a></li>
+                        <li><a th:href="@{/deckbuilder}">DECKBUILDER</a></li>
+                        <li><a th:href="@{/community}">COMMUNITY</a></li>
+                        <li><a th:href="@{/login}" class="active">AREA PERSONALE</a></li>
+                        <li>
+                            <div id="language-switch">
+                                <button id="switch-lang">
+                                    <img th:src="@{/media/it.png}" alt="Language Flag" class="flag">
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <section id="registration-form-section">
+                    <h2>Registrati come nuovo Trainer</h2>
+
+                    <!-- Aggiungi messaggio di conferma registrazione -->
+                    <div th:if="${successMessage != null}">
+                        <div class="alert alert-success" th:text="${successMessage}">Registrazione completata!</div>
+                    </div>
+
+                    <form id="registration-form" th:action="@{/register/save}" method="post">
+                        <label for="new-username">Nome Utente:</label>
+                        <input type="text" id="new-username" name="username" placeholder="Inserisci il tuo nome utente" th:field="*{name}" maxlength="30" required>
+                        <p th:errors="*{name}" class="text-danger"></p>
+
+                        <label for="new-email">Email:</label>
+                        <input type="email" id="new-email" name="email" placeholder="Inserisci la tua email" th:field="*{email}" required>
+                        <p th:errors="*{email}" class="text-danger"></p>
+
+                        <label for="new-full-name">Nome Completo:</label>
+                        <input type="text" id="new-full-name" name="fullName" placeholder="Inserisci il tuo nome completo" th:field="*{fullName}" required>
+                        <p th:errors="*{fullName}" class="text-danger"></p>
+
+                        <label for="new-birthdate">Data di Nascita:</label>
+                        <input type="date" id="new-birthdate" name="birthdate" th:field="*{birthdate}" required>
+                        <p th:errors="*{birthdate}" class="text-danger"></p>
+
+                        <label for="new-birthplace">Luogo di Nascita:</label>
+                        <input type="text" id="new-birthplace" name="birthplace" placeholder="Inserisci il tuo luogo di nascita" th:field="*{birthplace}" required>
+                        <p th:errors="*{birthplace}" class="text-danger"></p>
+
+                        <label for="new-phone-number">Numero di Telefono:</label>
+                        <input type="tel" id="new-phone-number" name="phoneNumber" placeholder="Inserisci il tuo numero di telefono" th:field="*{phoneNumber}" required>
+                        <p th:errors="*{phoneNumber}" class="text-danger"></p>
+
+                        <label for="new-password">Password:</label>
+                        <input type="password" id="new-password" name="password" placeholder="Crea una password" th:field="*{password}" maxlength="30" required>
+                        <p th:errors="*{password}" class="text-danger"></p>
+
+                        <label for="confirm-password">Conferma Password:</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" placeholder="Conferma la tua password" th:field="*{confirmPassword}" maxlength="30" required>
+                        <p th:errors="*{confirmPassword}" class="text-danger"></p>
+
+                        <button type="submit">Registrati</button>
+                    </form>
+                </section>
+            </main>
+
+            <footer>
+                <div class="footer-container">
+                    <div class="footer-info">
+                        <h3>Multinazionalona SPA</h3>
+                        <p>Via Esempio 123, 00100 Roma, Italia</p>
+                        <p>+39 012 3456789</p>
+                        <p>info@multinazionalona.it</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/multinazionalona" target="_blank">Facebook</a>
+                        <a href="https://www.instagram.com/multinazionalona" target="_blank">Instagram</a>
+                        <a href="https://www.linkedin.com/company/multinazionalona" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </footer>
+
+            <script src="script/registrazione.js" defer></script>
+            </body>
+            </html>
+
         </div>
     </div>
 </nav>

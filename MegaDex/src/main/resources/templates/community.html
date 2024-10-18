@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaDex</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+<header>
+    <img src="media/MegaDex-17-09-2024.png" alt="MegaDex Logo" class="logo">
+    <nav>
+        <ul>
+            <li><a th:href="@{/index}" class="active">HOME</a></li>
+            <li><a th:href="@{/deckbuilder}" >DECKBUILDER</a></li>
+            <li><a th:href="@{/community}" class="active">COMMUNITY</a></li>
+            <li><a th:href="@{/login}" >AREA PERSONALE</a></li>
+            <li>
+                <div id="language-switch">
+                    <button id="switch-lang">
+                        <img id="flag-image" src="media/it.png" alt="Language Flag" class="flag">
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Sezione di ricerca -->
+    <section id="home">
+        <h1>Cerca un mazzo o un autore</h1>
+        <form id="search-form" th:action="@{/search}" method="get">
+            <input type="text" name="find" placeholder="Cerca un mazzo o un autore" required>
+            <button type="submit">Cerca</button>
+        </form>
+    </section>
+
+    <!-- Sezione di visualizzazione dei mazzi della community -->
+    <section id="deck-list">
+        <h1>Mazzi della community</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome Mazzo</th>
+                <th>Tipi</th>
+                <th>Autore</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Itera sui mazzi della community con Thymeleaf -->
+            <tr th:each="deck : ${decks}" data-deck="${deck.name}" class="deck-row">
+                <td th:text="${deck.name}">Nome Mazzo</td>
+                <td th:text="${deck.types}">Tipi Mazzo</td>
+                <td th:text="${deck.author}">Autore</td>
+                <td class="button-group">
+                    <button class="comm-btn" th:onclick="'likeDeck(\'' + ${deck.name} + '\')'">
+                        <i class="bi bi-hand-thumbs-up-fill"></i><span> Mi Piace</span>
+                    </button>
+                    <button class="comm-btn" th:onclick="'downloadDeck(\'' + ${deck.name} + '\')'">
+                        <i class="bi bi-download"></i><span> Scarica</span>
+                    </button>
+                    <button class="comm-btn" th:onclick="'saveDeck(\'' + ${deck.name} + '\')'">
+                        <i class="bi bi-cloud-upload-fill"></i><span> Salva</span>
+                    </button>
+                </td>
+            </tr>
+            <tr th:each="deck : ${decks}" data-deck="details-${deck.name}" class="details-row" style="display: none;">
+                <td colspan="3">
+                    <div class="card-container-js" th:id="'details-' + ${deck.name}">
+                        <!-- Le carte del mazzo saranno aggiunte qui -->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-info">
+            <h3>Multinazionalona SPA</h3>
+            <p>Via Esempio 123, 00100 Roma, Italia</p>
+            <p>+39 012 3456789</p>
+            <p>info@multinazionalona.it</p>
+        </div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/multinazionalona" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/multinazionalona" target="_blank">Instagram</a>
+            <a href="https://www.linkedin.com/company/multinazionalona" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Script per gestione dinamica (eventualmente separato in file esterno) -->
+<script src="script/community.js" defer></script>
+</body>
+</html>
