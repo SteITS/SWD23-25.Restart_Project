@@ -42,9 +42,9 @@ public class SpringSecurity {
                                 .requestMatchers("/success").hasAnyRole("ADMIN", "USER")
                 ).formLogin(
                         form -> form
-                                .loginPage("/login")
+                                .loginPage("/login.html")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/success", true)
+                                .defaultSuccessUrl("/personale.html", true)
                                 .permitAll()
                 ).logout(
                         logout -> logout

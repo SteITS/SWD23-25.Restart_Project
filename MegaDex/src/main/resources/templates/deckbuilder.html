@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MegaDex</title>
-  <link rel="stylesheet" type="text/css" href="../static/css/deckbuilder.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/deckbuilder.css}">
 </head>
 <body>
 <header>
-  <img src="../static/media/MegaDex-17-09-2024.png" alt="PokemonDB Logo" class="logo">
+  <img th:src="@{/media/MegaDex-17-09-2024.png}" alt="PokemonDB Logo" class="logo">
   <nav>
     <ul>
       <li><a th:href="@{/index}" class="active">HOME</a></li>
@@ -18,7 +18,7 @@
       <li>
         <div id="language-switch">
           <button id="switch-lang">
-            <img id="flag-image" src="../static/media/it.png" alt="Language Flag" class="flag">
+            <img id="flag-image" th:src="@{/media/it.png}" alt="Language Flag" class="flag">
           </button>
         </div>
       </li>
@@ -40,7 +40,7 @@
       <li>
         <div class="menu-container">
           <label for="sort-menu">Ordina per:</label>
-          <select id="sort-menu" th:field="*{sortOption}">
+          <select id="sort-menu" >
             <option value="">Seleziona un'opzione</option>
             <option th:value="'name'">Per nome</option>
             <option th:value="'text'">Per testo</option>
@@ -53,7 +53,7 @@
       <li>
         <div class="menu-container">
           <label for="filter-menu">Filtri:</label>
-          <select id="filter-menu" th:field="*{filterOption}">
+          <select id="filter-menu" >
             <option value="">Seleziona un filtro</option>
             <option th:value="'card-typology'">Tipologia carta</option>
             <option th:value="'subtype'">Sottotipo carta</option>
@@ -97,6 +97,6 @@
   </section>
 </main>
 
-<script src="../static/js/deckbuilder.js" defer></script>
+<script th:src="@{/js/deckbuilder.js}" defer></script>
 </body>
 </html>
