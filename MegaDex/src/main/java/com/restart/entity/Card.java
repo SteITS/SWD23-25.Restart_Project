@@ -1,7 +1,7 @@
 package com.restart.entity;
 import java.util.Set;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 //Entity class representing a Card in the database
 @Entity
 @Table(name = "cards")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Card {
 
 	//Id dell'oggetto

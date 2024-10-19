@@ -6,8 +6,12 @@ import com.restart.entity.User;
 import com.restart.service.CardServiceImpl;
 import com.restart.service.SleeveServiceImpl;
 import com.restart.service.UserServiceImpl;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,5 +77,23 @@ public class SleeveController {
         } catch (Exception e) {
             return ResponseEntity.noContent().build();
         }
+    }
+    
+ // Nuovo endpoint per ottenere le sleeves dell'utente autenticato
+    @GetMapping("/auth/mySleeves")
+    public ResponseEntity<List<Sleeve>> getMySleeves() {
+        // Recupera l'utente autenticato
+        User user = userService.getAuthenticatedUser();
+        
+        // Ottiene tutte le sleeves dell'utente autenticato
+        List<Sleeve> sleeves = sleeveService.getSleevesByUserId(user.getId());
+        
+        // Se non ci sono sleeves, restituisce no content
+        if (sleeves.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        
+        // Altrimenti restituisce le sleeves
+        return ResponseEntity.ok(sleeves);
     }
 }

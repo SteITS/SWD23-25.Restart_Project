@@ -9,4 +9,5 @@ public interface SleeveService {
     Sleeve saveSleeve(Sleeve sleeve);
 
     void removeSleeve(Sleeve sleeve);
+    List<Sleeve> getSleevesByUserId(int userId);
 }

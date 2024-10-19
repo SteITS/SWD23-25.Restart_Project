@@ -30,4 +30,9 @@ public class SleeveServiceImpl implements SleeveService {
     public void removeSleeve(Sleeve sleeve) {
         dao.deleteById(sleeve.getId());
     }
+    //nuovo metodo per ottenere le sleeves tramite ID utente
+    @Override
+    public List<Sleeve> getSleevesByUserId(int userId) {
+        return dao.findByUserId(userId);
+    }
 }

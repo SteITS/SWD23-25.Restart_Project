@@ -33,6 +33,7 @@ public class SpringSecurity {
                                 .requestMatchers("/api/auth/**").hasAnyRole("ADMIN", "USER")
                                 .requestMatchers("/api/deb/**").permitAll()
                                 .requestMatchers("/index").permitAll()
+                                .requestMatchers("/login").permitAll()
                                 .requestMatchers("/css/**").permitAll()
                                 .requestMatchers("/media/**").permitAll()
                                 .requestMatchers("/js/**").permitAll()
