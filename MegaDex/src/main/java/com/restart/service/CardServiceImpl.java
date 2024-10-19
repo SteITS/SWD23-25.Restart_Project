@@ -22,7 +22,7 @@ public class CardServiceImpl implements CardService {
     @Autowired
     private CardRepository dao;
 
-    private static final int PAGE_SIZE = 100;  // Dimensione pagina per la ricerca filtrata (modificabile)
+    private static final int PAGE_SIZE = 15;  // Dimensione pagina per la ricerca filtrata (modificabile)
 
     //Metodo per ricercare tutte le carte secondo uno o più specifici filtri
     public CardDto getFilteredCards(String id, String name, String supertype, String type, String subtype, String set, int page, String orderBy, String direction) {
@@ -36,16 +36,16 @@ public class CardServiceImpl implements CardService {
             if (name != null) {
                 predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
             }
-            if (supertype != null) {
+            if (supertype != null && !supertype.isEmpty()) {
                 predicates.add(cb.equal(cb.lower(root.join("supertype").get("name")), supertype.toLowerCase()));
             }
-            if (type != null) {
+            if (type != null && !type.isEmpty()) {
                 predicates.add(cb.equal(cb.lower(root.join("types").get("name")), type.toLowerCase()));
             }
-            if (subtype != null) {
+            if (subtype != null && !subtype.isEmpty()) {
                 predicates.add(cb.equal(cb.lower(root.join("subtypes").get("name")), subtype.toLowerCase()));
             }
-            if (set != null) {
+            if (set != null && !set.isEmpty()) {
                 predicates.add(cb.equal(cb.lower(root.get("set")), set.toLowerCase()));
             }
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MegaDex</title>
+  <link rel="stylesheet" type="text/css" href="css/sleeve.css">
+</head>
+<body>
+<header>
+  <img src="media/MegaDex-17-09-2024.png" alt="PokemonDB Logo" class="logo">
+  <nav>
+    <ul>
+      <li><a href="/index" class="active">HOME</a></li>
+      <li><a href="/deckbuilder" class="active">DECKBUILDER</a></li>
+      <li><a href="/community">COMMUNITY</a></li>
+      <li><a href="/login" >AREA PERSONALE</a></li>
+      <li>
+        <div id="language-switch">
+          <button id="switch-lang">
+            <img id="flag-image" src="/media/it.png" alt="Language Flag" class="flag">
+          </button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="sleeves">
+    <h1>Costruisci il tuo mazzo</h1>
+    <form id="search-form1" action="/cards" method="get">
+      <div class="input-button-container">
+        <input type="text" name="card-search" placeholder="Cerca una carta">
+        <button type="submit">Cerca</button>
+      </div>
+    </form>
+    <dl>
+      <li>
+        <div class="menu-container">
+          <label for="sort-menu">Ordina per:</label>
+          <select id="sort-menu" >
+            <option>Seleziona un'opzione</option>
+            <option value="name">Per nome</option>
+            <option value="subtype">Per sottotipo</option>
+            <option value="type">Per tipo</option>
+            <option value="supertype">Per supertipo</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="menu-container">
+          <label for="filter-type">Tipo:</label>
+          <select id="filter-type" >
+            <option value="">nessun filtro</option>
+            <option value="Fire" >Fuoco</option>
+            <option value="Water" >Acqua</option>
+            <option value="Grass" >Erba</option>
+            <option value="Psychic" >Psichico</option>
+            <option value="Fairy" >Fata</option>
+            <option value="Dragon" >Drago</option>
+            <option value="Fighitng" >Lotta</option>
+            <option value="Lightning" >Elettro</option>
+            <option value="Darkness" >Buio</option>
+            <option value="Metal" >Acciaio</option>
+            <option value="Colorless" >Incolore</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="menu-container">
+          <label for="filter-subtype">Sottotipo:</label>
+          <select id="filter-subtype" >
+            <option value="" disabled selected>nessun filtro</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="menu-container">
+          <label for="filter-regulationMark">RMark:</label>
+          <select id="filter-regulationMark" >
+            <option value="" disabled selected>nessun filtro</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="menu-container">
+          <label for="filter-supertype">Supertipo:</label>
+          <select id="filter-supertype" >
+            <option value="" disabled selected>nessun filtro</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="menu-container">
+          <label for="filter-release">Espansione:</label>
+          <select id="filter-release" >
+            <option value="" disabled selected>nessun filtro</option>
+            <option value="Team Rocket Returns" >Team Rocket Returns</option>
+            <option value="Scarlet & Violet Black Star Promos" >Scarlet & Violet Black Star Promos</option>
+            <option value="Evolving Skies" >Evolving Skies</option>
+            <option value="Obsidian Flames" >Obsidian Flames</option>
+            <option value="SWSH Black Star Promos" >SWSH Black Star Promos</option>
+            <option value="Holon Phantoms" >Holon Phantoms</option>
+            <option value="Nintendo Black Star Promos" >Nintendo Black Star Promos</option>
+            <option value="POP Series 6" >POP Series 6</option>
+            <option value="Emerald" >Emerald</option>
+            <option value="McDonald's Collection 2012" >McDonald's Collection 2012</option>
+            <option value="Pokémon Futsal Collection" >Pokémon Futsal Collection</option>
+          </select>
+        </div>
+
+      </li>
+    </dl>
+
+    <div class="card-list">
+      <!-- Carte visualizzate dinamicamente -->
+
+    </div>
+    <div class="pagination">
+      <button id="prev-page" disabled><</button>
+      <span id="current-page">Pagina 1</span>
+      <button id="next-page">></button>
+    </div>
+  </section>
+
+
+</main>
+
+<script src="js/sleeve.js" defer></script>
+</body>
+</html>
