@@ -76,7 +76,7 @@ public class AuthController {
     public String users(Model model){
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        return "users";
+        return "community";
     }
 
     // Metodo per gestire la richiesta della pagina di login

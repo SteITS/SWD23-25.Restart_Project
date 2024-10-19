@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaDex</title>
+    <!-- Collegamento corretto al file CSS usando Thymeleaf -->
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+<header>
+    <!-- Collegamento corretto all'immagine logo usando Thymeleaf -->
+    <img src="media/MegaDex-17-09-2024.png" alt="PokemonDB Logo" class="logo">
+    <nav>
+        <ul>
+            <li><a href="index">HOME</a></li>
+            <li><a href="deckbuilder">DECKBUILDER</a></li>
+            <li><a href="community">COMMUNITY</a></li>
+            <li><a href="login" class="active">AREA PERSONALE</a></li>
+
+            <li>
+                <div id="language-switch">
+                    <button id="switch-lang">
+                        <!-- Collegamento corretto all'immagine della bandiera usando Thymeleaf -->
+                        <img id="flag-image" src="media/it.png" alt="Language Flag" class="flag">
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="login-section">
+        <div id="login">
+            <h1>Accedi come allenatore</h1>
+            <!-- Collegamento corretto del form con Thymeleaf -->
+            <form id="login-form" action="/login" method="post">
+                <label for="username">Utente:</label>
+                <input type="text" id="username" name="username" placeholder="Trainer ID" maxlength="30" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="********" maxlength="30" required>
+
+                <button type="submit">Accedi</button>
+                <p class="registrati">Non sei ancora registrato? <br><a th:href="@{/registrazione}"> Registrati qui </a></p>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- Collegamento corretto al file JavaScript usando Thymeleaf -->
+<script src="./js/login.js" defer></script>
+</body>
+</html>
