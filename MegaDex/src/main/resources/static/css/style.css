@@ -54,11 +54,7 @@ header nav {
     display: flex;
     align-items: center;
 }
-.menu-container{
-    border-radius: 10px;
-    background-color: #333;
-    color: white;
-}
+
 
 header nav ul {
     list-style-type: none;

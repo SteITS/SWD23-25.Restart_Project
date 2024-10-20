@@ -228,13 +228,14 @@ function updateCardList(cards) {
     });
 }
 
+
 // Funzione per aggiornare i bottoni di navigazione
 function updatePagination(totalPages) {
     const prevButton = document.getElementById('prev-page');
     const nextButton = document.getElementById('next-page');
     const currentPageDisplay = document.getElementById('current-page');
 
-    currentPageDisplay.innerText = `Pagina ${currentPage}`;
+    currentPageDisplay.innerText = `Pagina ${currentPage} di ${totalPages}`;
 
     // Abilita/disabilita i bottoni in base alla pagina corrente
     prevButton.disabled = currentPage === 1;
@@ -260,5 +261,4 @@ document.getElementById('search-form1').addEventListener('submit', (event) => {
     currentPage = 1; // Resetta la pagina a 1 quando si effettua una nuova ricerca
     searchCards(currentPage);
 });
-
 

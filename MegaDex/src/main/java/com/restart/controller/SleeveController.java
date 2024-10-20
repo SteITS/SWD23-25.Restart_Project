@@ -79,7 +79,7 @@ public class SleeveController {
         }
     }
     
- // Nuovo endpoint per ottenere le sleeves dell'utente autenticato
+ // endpoint per ottenere le sleeves dell'utente autenticato
     @GetMapping("/auth/mySleeves")
     public ResponseEntity<List<Sleeve>> getMySleeves() {
         // Recupera l'utente autenticato
