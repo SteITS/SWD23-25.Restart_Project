@@ -99,8 +99,7 @@ public class CardServiceImpl implements CardService {
 
         // Controlla se sleeveCardIds è vuoto
         if (sleeveCardIds.isEmpty()) {
-            System.out.println("No cards found in user's sleeves.");
-            return new CardDto(new ArrayList<>(), page, 0, 0); // No cards found
+            System.out.println("No cards found in user's sleeves.");// No cards found
         }
 
         // Crea Specification per il filtraggio
@@ -108,14 +107,10 @@ public class CardServiceImpl implements CardService {
             List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
 
             // Aggiungi condizione per controllare se l'ID della carta è nelle sleeve dell'utente
-            if (owned) {
+            if (owned != null && owned) {
                 predicates.add(root.get("id").in(sleeveCardIds));
             }
 
-            // Filtri aggiuntivi
-            if (id != null) {
-                predicates.add(cb.equal(root.get("id"), id));
-            }
             if (name != null) {
                 predicates.add(cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
             }
