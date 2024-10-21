@@ -2,6 +2,7 @@ package com.restart.controller;
 
 
 
+import com.restart.entity.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,13 +51,20 @@ public class CardController {
             @RequestParam(required = false) String set, 
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "name") String orderBy,
-            @RequestParam(defaultValue = "asc") String direction
+            @RequestParam(defaultValue = "asc") String direction,
+            @RequestParam(required = false) Boolean owned
     ) {
         // Get the filtered cards that are in the authenticated user's sleeves
-        CardDto filteredCardsInSleeves = service.getFilteredCardsInMySleeves(id, name, supertype, type, subtype, set, page, orderBy, direction);
+        CardDto filteredCardsInSleeves = service.getFilteredCardsInMySleeves(owned, id, name, supertype, type, subtype, set, page, orderBy, direction);
 
         // Return the filtered cards in sleeves as a ResponseEntity
         return ResponseEntity.ok(filteredCardsInSleeves);
+    }
+
+    @GetMapping("api/deb/cardById")
+    public ResponseEntity<Card> getCardById(@RequestParam String id) {
+        Card card = service.getCardById(id).orElseThrow();
+        return ResponseEntity.ok(card);
     }
 }
 	

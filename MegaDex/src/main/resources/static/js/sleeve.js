@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 community: "COMMUNITY",
                 personalArea: "AREA PERSONALE"
             },
-            buildDeck: "Costruisci il tuo mazzo",
+            buildDeck: "Raccoglitore",
             search: {
                 placeholder: "Cerca una carta",
                 button: "Cerca"
@@ -170,6 +170,7 @@ let currentPage = 1; // Pagina corrente iniziale
 async function searchCards(page = 1) {
     // Prevenire il comportamento predefinito del form
     const name = document.querySelector('input[name="card-search"]').value;
+    const owned = document.getElementById("filter-sleeve").value;
     const orderBy = document.getElementById("sort-menu").value;
     const type = document.getElementById("filter-type").value;
     const subtype = document.getElementById("filter-subtype").value;
@@ -177,6 +178,7 @@ async function searchCards(page = 1) {
     const release = document.getElementById("filter-release").value;
 
     const params = new URLSearchParams({
+        owned: owned,
         name: name,
         type: type,
         subtype: subtype,
@@ -187,14 +189,8 @@ async function searchCards(page = 1) {
         page: page,
     });
 
-
-    // Aggiungi parametri di ordinamento
-    // params.orderBy = orderBy === "Seleziona un'opzione" ? "Id" : orderBy.toLowerCase();
-    // params.direction = "asc";
-    // params.page = page;
-
     try {
-        const response = await fetch(`http://localhost:8080/cards?${params.toString()}`);
+        const response = await fetch(`http://localhost:8080/api/auth/filtered-in-sleeves?${params.toString()}`);
         if (!response.ok) {
             throw new Error("Errore durante il recupero delle carte");
         }
@@ -206,7 +202,8 @@ async function searchCards(page = 1) {
     }
 }
 
-// Funzione per aggiornare la lista delle carte in base ai risultati della ricerca
+
+
 function updateCardList(cards) {
     const cardListContainer = document.querySelector('.card-list');
     cardListContainer.innerHTML = '';
@@ -221,11 +218,81 @@ function updateCardList(cards) {
         cardElement.classList.add('card-item');
         cardElement.innerHTML = `
         <div class="card">
-        <img src="${card.img}" alt="">      
+        <img src="${card.img}" alt="" onclick="selectCard('${card.id}')">
         </div>
       `;
         cardListContainer.appendChild(cardElement);
     });
+}
+
+async function selectCard(cardId) {
+    const param = new URLSearchParams({id: cardId})
+    let card;
+    try {
+        const response = await fetch(`http://localhost:8080/api/deb/cardById?${param.toString()}`);
+        if (!response.ok) {
+            throw new Error("Errore durante il recupero della carta");
+        }
+        card = await response.json();
+    } catch (error) {
+        console.error("Errore:", error);
+    }
+
+    const cardContainer = document.querySelector('.card-details');
+    cardContainer.innerHTML = '';
+
+        const cardElement = document.createElement('div');
+        const  slot = getMySleeve(card.id);
+        let quantity;
+
+        if (slot === undefined)
+            quantity = 0;
+        else
+            quantity = slot.quantity;
+
+        cardElement.classList.add('card-item');
+        cardElement.innerHTML = `
+        <div class="selected-card">
+        <img src="${card.img}" alt="">
+        <div class="quantity-control">
+        <button class="decrement" onclick="updateQuantity('${card.id}', -1)">-</button>
+        <p id="quantity-${card.id}">${quantity}</p>
+        <button class="increment" onclick="updateQuantity('${card.id}', 1)">+</button>
+        </div>
+        </div>
+        <div class="card-sheet">
+        <p><span>Id:</span> ${card.id}</p>
+        <p><span>Set:</span> ${card.set}</p>
+        <p><span>Serie:</span> ${card.series}</p>
+        <p><span>Publisher:</span> ${card.publisher}</p>
+        <p><span>Generazione:</span> ${card.generation}</p>
+        <p><span>Data di rilascio:</span> ${card.release_date}</p>
+        <p><span>Artista:</span> ${card.artist}</p>
+        <p><span>Nome:</span> ${card.name}</p>
+        <p><span>Numero del set:</span> ${card.set_num}</p>
+        <p><span>Livello:</span> ${card.level}</p>
+        <p><span>Punti vita:</span> ${card.hp}</p>
+        <p><span>Evoluzione da:</span> ${card.evolves_from}</p>
+        <p><span>Evoluzione a:</span> ${card.evolves_to}</p>
+        <p><span>Costo di ritirata:</span> ${card.retreat_cost}</p>
+        <p><span>Costo di ritirata convertito:</span> ${card.converted_retreat_cost}</p>
+        <p><span>Rarità:</span> ${card.rarity}</p>
+        <p><span>Testo descrittivo:</span> ${card.flavor_text}</p>
+        <p><span>Numero nel Pokédex nazionale:</span> ${card.national_pokedex_numbers}</p>
+        <p><span>Legalità:</span> ${card.legalities}</p>
+        <p><span>Regole:</span> ${card.rules}</p>
+        <p><span>Marchio di regolamento:</span> ${card.regulation_mark}</p>
+        <p><span>Tratto antico:</span> ${card.ancient_trait}</p>
+        <p><span>Attacchi:</span> ${card.attacks}</p>
+        <p><span>Abilità:</span> ${card.abilities}</p>
+        <p><span>Debolezze:</span> ${card.weaknesses}</p>
+        <p><span>Resistenze:</span> ${card.resistances}</p>
+        <p><span>Tipi:</span> ${card.types}</p>
+        <p><span>Sottotipi:</span> ${card.subtypes}</p>
+        <p><span>Supertipo:</span> ${card.supertype}</p>
+    </div> 
+      `;
+    cardContainer.appendChild(cardElement);
 }
 
 
@@ -241,6 +308,63 @@ function updatePagination(totalPages) {
     prevButton.disabled = currentPage === 1;
     nextButton.disabled = currentPage === totalPages;
 }
+
+
+function getMySleeve(cardId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `http://localhost:8080/api/auth/mySleeve?cardRequest=${cardId}`, false); // false per farlo sincrono
+    xhr.send();
+    if (xhr.status === 200) {
+        return JSON.parse(xhr.responseText);
+    } else {
+        console.error('Errore nella chiamata GET:', xhr.status);
+        return undefined;
+    }
+}
+
+
+async function updateQuantity(cardId, change) {
+    // Ottieni il riferimento all'elemento che mostra la quantità
+    const quantityElement = document.getElementById(`quantity-${cardId}`);
+    let currentQuantity = parseInt(quantityElement.textContent);
+
+    // Aggiorna la quantità
+    let newQuantity = currentQuantity + change;
+
+    // Controlla che la quantità non diventi negativa
+    if (newQuantity < 0) {
+        newQuantity = 0;
+    }
+
+    // Aggiorna il testo della quantità nell'interfaccia utente
+    quantityElement.textContent = newQuantity;
+
+    // Prepara i dati da inviare nella chiamata POST
+    const data = {
+        id: {idCard: cardId},
+        quantity: newQuantity
+    };
+
+    // Effettua la chiamata POST per aggiornare la quantità nel server
+    fetch('http://localhost:8080/api/auth/updateSleeve', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    await selectCard(cardId);
+    await searchCards(currentPage);
+}
+
 
 // Event listeners per i bottoni di navigazione
 document.getElementById('prev-page').addEventListener('click', () => {

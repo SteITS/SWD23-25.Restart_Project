@@ -1,8 +1,12 @@
 package com.restart.service;
 
 import com.restart.dto.CardDto;
+import com.restart.entity.Card;
+
+import java.util.Optional;
 
 public interface CardService {
+	Optional<Card> getCardById(String id);
 
     CardDto getFilteredCards(
     		String Id,
@@ -16,7 +20,8 @@ public interface CardService {
     		String direction
     );	
     CardDto getFilteredCardsInMySleeves(
-    		String Id,
+    		Boolean owned,
+			String Id,
     		String name,
     		String supertype,
     		String type,

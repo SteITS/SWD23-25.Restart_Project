@@ -43,6 +43,7 @@ header .logo {
 header a {
     color: #333;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 header a.active {
@@ -64,7 +65,6 @@ header nav ul {
 }
 
 header nav ul li {
-    display: inline;
     margin: 0 15px;
 }
 
@@ -89,16 +89,17 @@ header nav ul li a:hover {
     border: none;
     cursor: pointer;
 }
+
 #switch-lang {
     margin-left: 5px;
 }
+
 #language-switch .flag {
     height: 20px;
     width: auto;
 }
 
 main {
-    margin-top: 0px;
     padding: 1em;
     flex: 1;
     display: flex;
@@ -113,7 +114,6 @@ h1, h2, h3 {
 #home h1 {
     color: #333; /* Colore per 'Welcome to PokemonDB, Trainer!' */
 }
-
 
 p {
     color: #333;
@@ -130,9 +130,8 @@ section {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-#search-form2 {
+#search-form1, #search-form2 {
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -140,15 +139,14 @@ form input[type="text"], form input[type="password"], form select {
     padding: 10px;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 1em;
-    margin-top: 1em;
+    margin: 1em 0;
     border-radius: 25px;
     border: 2px solid #2980b9;
     outline: none;
     transition: border 0.3s ease;
 }
 
-form button, .button-deck {
+form button, .button-deck, .selected-card button {
     padding: 10px 20px;
     background: #2980b9;
     border: none;
@@ -156,10 +154,10 @@ form button, .button-deck {
     color: white;
     font-size: 1em;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background 0.3s ease;
 }
 
-form button:hover, .button-deck:hover, #search-form1 button:hover {
+form button:hover, .selected-card button:hover {
     background: #1abc9c;
 }
 
@@ -180,31 +178,17 @@ form button:hover, .button-deck:hover, #search-form1 button:hover {
     transition: border 0.3s ease;
 }
 
-#search-form1 button {
-    padding: 10px 20px;
-    background: #2980b9;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s ease;
+.selected-card button {
+    width: 40px; /* Imposta una larghezza fissa per i bottoni */
+    height: 40px; /* Imposta la stessa altezza per i bottoni */
+    font-size: 18px; /* Dimensione del testo all'interno del bottone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-.button-deck{
+.button-deck {
     margin-bottom: 10px;
-}
-
-input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-#search, #matchups, #login-section, #home, #sleeves, #aside-top, #aside-bottom, .sidebar {
-    animation: fadeIn 1s ease-in;
-}
-#search {
-    text-align: center;
 }
 
 .card-container {
@@ -213,23 +197,29 @@ input[type="checkbox"] {
     margin-top: 20px;
 }
 
-.card {
-    padding: 10px;
-    width: 200px;
-    text-align: center;
-    background-color: black;
+.card-sheet {
+    font-family: Arial, sans-serif;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Stili per i titoli delle proprietà */
+.card-sheet p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.card-sheet p span {
+    font-weight: bold;
+    color: #333;
 }
 
 .card-title {
     font-size: 10px;
 }
 
-.card img {
-    width: 100%;
-    height: auto;
-}
-
-.card p {
+.selected-card p {
+    display: flex;
     font-size: 0.9em;
     color: #333;
     align-items: center;
@@ -246,54 +236,15 @@ input[type="checkbox"] {
     }
 }
 
-#sleeves h1 {
+#sleeves h1, #card-details h1 {
     color: #333;
     margin-bottom: 20px;
 }
 
-#search-form1 {
-    display: flex;
-    align-items: center;
-}
-#search-form2 {
-    display: flex;
-    align-items: center;
-}
-
 #search-form2 input[type="text"] {
     flex: 10;
-    border-radius: 25px;
-    border: 2px solid #2980b9;
-    outline: none;
-    transition: border 0.3s ease;
     display: inline-block;
     width: 100%;
-}
-#search-form1 input[type="text"] {
-    flex: 10;
-    border-radius: 25px;
-    border: 2px solid #2980b9;
-    outline: none;
-    transition: border 0.3s ease;
-    display: inline-block;
-    width: 100%;
-}
-
-#search-form2 button {
-    padding: 9.5px 20px;
-    background: #2980b9;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s ease;
-    display: inline-block;
-
-}
-
-#search-form2  button:hover {
-    background: #1abc9c;
 }
 
 #search-form2 h2 {
@@ -306,73 +257,76 @@ input[type="checkbox"] {
     margin-top: 20px;
 }
 
+.card-details {
+    display: flex;
+    align-content: center;
+    margin-top: 20px;
+}
 
-.card {
+.card, .selected-card {
     background: white;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+.card {
     width: 180px;
 }
 
-.card img {
+.selected-card {
+    display: flex;
+    margin: 1.5em auto;
+    width: 240px;
+}
+
+.card img, .selected-card img {
     max-width: 100%;
     height: auto;
 }
 
 #sleeves {
-    width: 80%;
-    /*position: absolute;*/
+    width: 70%;
     margin: 1.5em auto;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    padding: 1.5em;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+#card-details {
+    width: 25%;
+    margin: 1.5em auto;
 }
 
 #selected-card-list {
     list-style-type: none;
     padding: 0;
-    
 }
-.selected-cards h2 {
-    margin-bottom: 3.7%;
-}
+
 #selected-card-list li {
     margin-bottom: 10px;
     padding: 5px;
     background: #eee;
-    border-radius: 4px; 
+    border-radius: 4px;
 }
 
-.card {
+.card, .selected-card {
     display: flex;
     flex-direction: column; /* Per mantenere l'immagine sopra il testo */
     align-items: center; /* Centra l'immagine e il testo */
-}
-
-.sidebar .card{
-    margin-top: 10%;
 }
 
 /* Contenitore per ciascun menu a tendina */
 .menu-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
-    display: inline-block;
-
+    flex: 1 1 calc(50% - 10px); /* Imposta la larghezza degli elementi al 50% meno un margine */
+    margin: 5px;
 }
 
-/* Etichetta dei menu */
 .menu-container label {
     font-weight: bold;
     margin-bottom: 5px;
-    display: inline;
 }
 
-/* Stile per i dropdown */
 .menu-container select {
     padding: 8px;
     border: 1px solid #ccc;
@@ -383,14 +337,12 @@ input[type="checkbox"] {
     background-color: #ffff;
 }
 
-/* Stilizzazione per migliorare la compatibilità con i dispositivi mobile */
 .menu-container select:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Media query per allineare i menu orizzontalmente su schermi più larghi */
 @media (min-width: 768px) {
     .menu-container {
         flex-direction: row;
@@ -408,32 +360,23 @@ input[type="checkbox"] {
     }
 }
 
-/* Layout container per la sezione del deckbuilder */
 .deck-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-/* Stile per la sezione sinistra (barra di ricerca e lista di carte) */
 .left-section {
     width: 75%;
     padding-right: 20px;
 }
 
-/* Menu a tendina */
-.menu-container {
-    margin-bottom: 15px;
-}
-
-/* Lista delle carte */
 .card-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-/* Ogni carta */
 .card {
     background: white;
     padding: 10px;
@@ -441,7 +384,7 @@ input[type="checkbox"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 180px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi transizione per l'ombra */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -449,64 +392,24 @@ input[type="checkbox"] {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta l'ombra per un effetto di profondità */
 }
 
-.card img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Carte selezionate */
-.selected-cards {
-    margin-bottom: 20px;
-}
-
-#selected-card-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-#selected-card-list li {
-    margin-bottom: 10px;
-    padding: 5px;
-    background: #ffff;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Bottone per rimuovere le carte selezionate */
-.remove-btn {
-    padding: 5px 8px;
-    background-color: lightgray;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out; /* Aggiungi la transizione qui */
-}
-
-.remove-btn:hover {
-    background-color: #e74c3c;
-    transition: 0.3s ease-in;
-}
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: 70%;
-    background: rgba(255, 255, 255, 0.9);
-    margin-right: 5%;
-    margin-bottom: 40%;
-    position: relative;
+.quantity-control {
+    display: flex; /* Utilizza Flexbox per disporre i contenuti in orizzontale */
+    align-items: center; /* Allinea verticalmente al centro */
+    justify-content: center; /* Centra gli elementi */
 }
 
 dl {
     list-style-type: none;
-    justify-content: center;
-    display: flex;
 }
 
 dl li {
-    display: inline-block;
-    margin: 0 15px;
+    margin: 0 auto;
+    width: 90%;
 }
+
+.filters-container {
+              /* Usa Flexbox per disporre gli elementi */
+    flex-wrap: wrap;        /* Permette agli elementi di andare a capo */
+    justify-content: space-around; /* Distribuisce lo spazio tra gli elementi */
+}
+

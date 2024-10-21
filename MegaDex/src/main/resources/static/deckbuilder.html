@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MegaDex</title>
+  <link rel="stylesheet" type="text/css" href="css/deckbuilder.css">
+</head>
+<body>
+<header>
+  <img src="/media/MegaDex-17-09-2024.png" alt="PokemonDB Logo" class="logo">
+  <nav>
+    <ul>
+      <li><a href="@{/index}" class="active">HOME</a></li>
+      <li><a href="@{/deckbuilder}" class="active">DECKBUILDER</a></li>
+      <li><a href="@{/community}">COMMUNITY</a></li>
+      <li><a href="@{/login}" >AREA PERSONALE</a></li>
+      <li><a href="/sleeve.html">COLLEZIONE PERSONALE</a></li>
+      <li>
+        <div id="language-switch">
+          <button id="switch-lang">
+            <img id="flag-image" src="@{/media/it.png}" alt="Language Flag" class="flag">
+          </button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="deckbuilder">
+    <h1>Costruisci il tuo mazzo</h1>
+    <form id="search-form1" action="search" method="get">
+      <div class="input-button-container">
+        <input type="text" name="card-search" placeholder="Cerca una carta" required>
+        <button type="submit">Cerca</button>
+      </div>
+    </form>
+
+    <dl>
+      <li>
+        <div class="menu-container">
+          <label for="sort-menu">Ordina per:</label>
+          <select id="sort-menu" >
+            <option value="">Seleziona un'opzione</option>
+            <option value="'name'">Per nome</option>
+            <option value="'text'">Per testo</option>
+            <option value="'typology'">Per tipologia</option>
+            <option value="'type'">Per tipo</option>
+            <option value="'evolution'">Per evoluzione</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="menu-container">
+          <label for="filter-menu">Filtri:</label>
+          <select id="filter-menu" >
+            <option value="">Seleziona un filtro</option>
+            <option value="'card-typology'">Tipologia carta</option>
+            <option value="'subtype'">Sottotipo carta</option>
+            <option value="'format'">Formato</option>
+            <option value="'card-type'">Tipo carta</option>
+            <option value="'edition'">Edizione</option>
+            <option value="'pokemon'">Pokémon</option>
+            <option value="'release-date'">Data rilascio</option>
+          </select>
+        </div>
+      </li>
+    </dl>
+
+    <div class="card-list">
+      <!-- Carte visualizzate dinamicamente -->
+      <div each="card : ${cards}" class="card">
+        <img src="${card.imageUrl}" alt="${card.name}">
+        <p text="${card.name}">Nome Carta</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sidebar">
+    <div class="selected-cards">
+      <h2>Carte Selezionate</h2>
+      <ul id="selected-card-list">
+        <li each="selectedCard : ${selectedCards}">
+          <p text="${selectedCard.name}">Nome carta selezionata</p>
+        </li>
+      </ul>
+    </div>
+
+    <button class="button-deck" type="submit" onclick="'saveDeck()'">Salva</button>
+    <button class="button-deck" type="submit" onclick="'exportDeck()'">Esporta</button>
+
+    <form id="search-form2" action="@{/import}" method="post">
+      <h2>Importa mazzo</h2>
+      <input type="text" name="deck-link" placeholder="Inserisci link" required>
+    </form>
+    <button class="button-deck" type="submit">Importa</button>
+  </section>
+</main>
+
+<script src="js/deckbuilder.js" defer></script>
+</body>
+</html>

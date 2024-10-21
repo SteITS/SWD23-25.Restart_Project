@@ -496,7 +496,6 @@ input[type="checkbox"] {
 
 dl {
     list-style-type: none;
-    justify-content: center;
     display: flex;
 }
 

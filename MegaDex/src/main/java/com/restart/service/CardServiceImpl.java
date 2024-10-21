@@ -85,7 +85,7 @@ public class CardServiceImpl implements CardService {
         );
     }
 
-    public CardDto getFilteredCardsInMySleeves(String id, String name, String supertype, String type, String subtype, String set, int page, String orderBy, String direction) {
+    public CardDto getFilteredCardsInMySleeves(Boolean owned, String id, String name, String supertype, String type, String subtype, String set, int page, String orderBy, String direction) {
     	// Recupera l'utente autenticato
         User user = userService.getAuthenticatedUser();
 
@@ -108,7 +108,9 @@ public class CardServiceImpl implements CardService {
             List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
 
             // Aggiungi condizione per controllare se l'ID della carta è nelle sleeve dell'utente
-            predicates.add(root.get("id").in(sleeveCardIds));
+            if (owned) {
+                predicates.add(root.get("id").in(sleeveCardIds));
+            }
 
             // Filtri aggiuntivi
             if (id != null) {

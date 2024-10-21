@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MegaDex</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/sleeve.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/sleeve.css">
 </head>
 <body>
 <header>
-    <img th:src="@{/media/MegaDex-17-09-2024.png}" alt="PokemonDB Logo" class="logo">
+    <img src="/media/MegaDex-17-09-2024.png" alt="PokemonDB Logo" class="logo">
     <nav>
         <ul>
-            <li><a th:href="@{/index}" class="active">HOME</a></li>
-            <li><a th:href="@{/deckbuilder}">DECKBUILDER</a></li>
-            <li><a th:href="@{/community}">COMMUNITY</a></li>
-            <li><a th:href="@{/login.html}">AREA PERSONALE</a></li>
+            <li><a href="/index.html" class="active">HOME</a></li>
+            <li><a href="/deckbuilder.html">DECKBUILDER</a></li>
+            <li><a href="/community.html">COMMUNITY</a></li>
+            <li><a href="/login.html">AREA PERSONALE</a></li>
+			<li><a href="/sleeve.html">COLLEZIONE PERSONALE</a></li>
 
             <li>
                 <div id="language-switch">
                     <button id="switch-lang">
-                        <img id="flag-image" th:src="@{/media/it.png}" alt="Language Flag" class="flag">
+                        <img id="flag-image" src="/media/it.png" alt="Language Flag" class="flag">
                     </button>
                 </div>
             </li>
@@ -42,9 +43,9 @@
         <button type="submit">Cerca</button>
       </div>
     </form>
-    <dl>
+    <div class="filters-container">
+	  <dl>
       <li>
-      
         <div class="menu-container">
           <label for="sort-menu">Ordina per:</label>
           <select id="sort-menu" >
@@ -285,6 +286,7 @@
 
       </li>
     </dl>
+	</div>
 
     <div class="card-list">
       <!-- Carte visualizzate dinamicamente -->
@@ -319,6 +321,6 @@
     </div>
 </footer>
  -->
-<script th:src="@{/js/script.js}" defer></script>
+<script src="/js/script.js" defer></script>
 </body>
 </html>
