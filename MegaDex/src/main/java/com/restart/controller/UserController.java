@@ -28,6 +28,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getAuthenticatedUser());
     }
 
+    // Rimuove dal db l'utente con l'id specificato
     @DeleteMapping("auth/deleteUser/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         userService.deleteUserById(id);
