@@ -45,6 +45,13 @@ public class UserServiceImpl implements UserService {
         // Codifica la password utilizzando Spring Security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
+        // Imposta il numero di telefono
+        user.setPhone(userDto.getPhone());
+
+        // Imposta la data di nascita
+        user.setDob(userDto.getDob());
+
+
         // Recupera il ruolo "ROLE_ADMIN" dal repository
         Role role = roleRepository.findByName("ROLE_ADMIN");
 
@@ -114,6 +121,12 @@ public class UserServiceImpl implements UserService {
 
         // Imposta l'email
         userDto.setEmail(user.getEmail());
+
+        // Imposta la data di nascita
+        userDto.setDob(user.getDob());
+
+        // Imposta il numero di telefono
+        userDto.setPhone(user.getPhone());
 
         // Restituisce il DTO dell'utente
         return userDto;
