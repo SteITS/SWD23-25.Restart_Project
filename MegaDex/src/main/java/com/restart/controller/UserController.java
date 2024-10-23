@@ -1,6 +1,7 @@
 package com.restart.controller;
 
 
+import com.restart.dto.UserDto;
 import com.restart.service.UserServiceImpl;
 import com.restart.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,11 @@ public class UserController {
         userService.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
-    
+
+    // Aggiorna l'utente con i dati passati nel body
+    @PutMapping("auth/updateUser")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+        userService.updateUser(userDto);
+        return ResponseEntity.ok(userDto);
+    }
 }
