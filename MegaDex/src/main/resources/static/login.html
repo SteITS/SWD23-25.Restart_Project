@@ -35,7 +35,7 @@
         <div id="login">
             <h1>Accedi come allenatore</h1>
             <!-- Collegamento corretto del form con Thymeleaf -->
-            <form id="login-form" action="/login" method="post">
+            <form id="login-form" method="post">
                 <label for="username">Utente:</label>
                 <input type="text" id="username" name="username" placeholder="Trainer ID" maxlength="30" required>
 
@@ -48,6 +48,12 @@
         </div>
     </section>
 </main>
+<div id="error-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="error-message">Si è verificato un errore nella registrazione. Riprova.</p>
+    </div>
+</div>
 
 <!-- Collegamento corretto al file JavaScript usando Thymeleaf -->
 <script src="./js/login.js" defer></script>

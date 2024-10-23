@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -27,6 +28,7 @@ public class UserDto
     private String password;
 
     @NotEmpty(message = "Date of birth should not be empty")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // Formato della data
     private Date dob;
     private String phone;
 }
