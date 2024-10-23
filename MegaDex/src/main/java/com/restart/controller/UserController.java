@@ -39,7 +39,11 @@ public class UserController {
     // Aggiorna l'utente con i dati passati nel body
     @PutMapping("auth/updateUser")
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
-        userService.updateUser(userDto);
-        return ResponseEntity.ok(userDto);
+        try {
+            userService.updateUser(userDto);
+            return ResponseEntity.ok(userDto);
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
