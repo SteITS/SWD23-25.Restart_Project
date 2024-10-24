@@ -105,40 +105,40 @@ if (languageSwitch.length > 0) {
 }
 
 
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+document.addEventListener('submit', function() {
     event.preventDefault(); // Evita il comportamento predefinito di invio del form
-
-    // Cattura i dati del form
-    const form = event.target;
-    const formData = new FormData(form);
-
-    // Crea la stringa x-www-form-urlencoded
-    const urlEncodedData = new URLSearchParams(formData).toString();
+    const errorModal = document.getElementById("error-modal");
+    const errorMessage = document.getElementById("error-message");
+    const loginForm = document.getElementById("login-form");
+    const formData = new FormData(loginForm);
 
     // Invia i dati con una richiesta fetch POST
     fetch('http://localhost:8080/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: urlEncodedData,
+        body: formData
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "personale.html";
+                return; // Se la risposta è un JSON
+            }
+            if(response.status === 403){
+                throw new Error("Credenziali non valide");
+            }
+            throw new Error("Errore sconosciuto durante il login");
+
+
         })
         .catch(error => {
-            console.error('Error:', error);
+            // Mostra un messaggio di errore
+            errorMessage.textContent = error;
+            errorModal.style.display = "block";
         });
+    // Funzione per chiudere il modal
+    document.querySelector(".close").addEventListener("click", function() {
+        errorModal.style.display = "none";
+    });
 });
 
-
-
-
-/*const loginForm = document.querySelector('#login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission behavior
-            window.location.href = 'personale.html'; // Redirect to the personal area page
-        });
-    };*/
