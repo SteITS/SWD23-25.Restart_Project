@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,11 @@
     <img src="media/MegaDex-17-09-2024.png" alt="MegaDex Logo" class="logo">
     <nav>
         <ul>
-            <li><a href="/index">HOME</a></li>
-            <li><a href="/deckbuilder">DECKBUILDER</a></li>
-            <li><a href="/community">COMMUNITY</a></li>
-            <li><a href="/login" class="active">AREA PERSONALE</a></li>
+            <li><a href="/index.html">HOME</a></li>
+            <li><a href="/deckbuilder.html">DECKBUILDER</a></li>
+            <li><a href="/community.html">COMMUNITY</a></li>
+            <li><a href="/sleeve.html">COLLEZIONE</a></li>
+            <li><a href="/login.html" class="active">AREA PERSONALE</a></li>
             <li>
                 <div id="language-switch">
                     <button id="switch-lang">
@@ -43,7 +44,7 @@
             </tr>
 <!--            <tr>-->
 <!--                <td><strong>Nome Completo:</strong></td>-->
-<!--                <td th:text="${user.fullName}">Mario Rossi</td>-->
+<!--                <td text="${user.fullName}">Mario Rossi</td>-->
 <!--                <td><button class="data" ><i class="bi bi-pencil-square"></i><span> Modifica</span></button></td>-->
 <!--            </tr>-->
 <!--            <tr>-->
@@ -86,7 +87,7 @@
             </tr>
             <tr class="details-row" style="display: none;">
                 <td colspan="3">
-                    <div class="card-container-js" th:id="'details-'">
+                    <div class="card-container-js" id="'details-'">
                         <!-- Le carte del mazzo verranno aggiunte dinamicamente qui -->
                     </div>
                 </td>

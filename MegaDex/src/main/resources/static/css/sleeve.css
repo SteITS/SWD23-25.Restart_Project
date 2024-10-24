@@ -10,7 +10,7 @@ html, body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    position: relative;
+
 }
 
 body {
@@ -43,6 +43,7 @@ header .logo {
 header a {
     color: #333;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 header a.active {
@@ -64,7 +65,6 @@ header nav ul {
 }
 
 header nav ul li {
-    display: inline;
     margin: 0 15px;
 }
 
@@ -89,16 +89,17 @@ header nav ul li a:hover {
     border: none;
     cursor: pointer;
 }
+
 #switch-lang {
     margin-left: 5px;
 }
+
 #language-switch .flag {
     height: 20px;
     width: auto;
 }
 
 main {
-    margin-top: 0px;
     padding: 1em;
     flex: 1;
     display: flex;
@@ -114,7 +115,6 @@ h1, h2, h3 {
     color: #333; /* Colore per 'Welcome to PokemonDB, Trainer!' */
 }
 
-
 p {
     color: #333;
     margin: 1em;
@@ -126,13 +126,11 @@ section {
     border-radius: 10px;
     margin: 1.5em auto;
     padding: 1.5em;
-    margin-left: 5%;
+    width: 80%;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-#search-form2 {
-    display: flex;
-    flex-direction: column;
+#search-form1, #search-form2 {
     align-items: center;
 }
 
@@ -140,15 +138,14 @@ form input[type="text"], form input[type="password"], form select {
     padding: 10px;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 1em;
-    margin-top: 1em;
+    margin: 1em 0;
     border-radius: 25px;
     border: 2px solid #2980b9;
     outline: none;
     transition: border 0.3s ease;
 }
 
-form button, .button-deck {
+form button, .button-deck, .selected-card button {
     padding: 10px 20px;
     background: #2980b9;
     border: none;
@@ -156,10 +153,10 @@ form button, .button-deck {
     color: white;
     font-size: 1em;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background 0.3s ease;
 }
 
-form button:hover, .button-deck:hover, #search-form1 button:hover {
+form button:hover, .selected-card button:hover {
     background: #1abc9c;
 }
 
@@ -180,31 +177,18 @@ form button:hover, .button-deck:hover, #search-form1 button:hover {
     transition: border 0.3s ease;
 }
 
-#search-form1 button {
-    padding: 10px 20px;
-    background: #2980b9;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s ease;
+.selected-card button {
+    width: 40px; /* Imposta una larghezza fissa per i bottoni */
+    height: 40px; /* Imposta la stessa altezza per i bottoni */
+    font-size: 18px; /* Dimensione del testo all'interno del bottone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
 }
 
-
-.button-deck{
+.button-deck {
     margin-bottom: 10px;
-}
-
-input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-#search, #matchups, #login-section, #home, #sleeves, #aside-top, #aside-bottom, .sidebar {
-    animation: fadeIn 1s ease-in;
-}
-#search {
-    text-align: center;
 }
 
 .card-container {
@@ -213,18 +197,13 @@ input[type="checkbox"] {
     margin-top: 20px;
 }
 
-.card {
-    padding: 10px;
-    width: 200px;
-    text-align: center;
+
+.card-title {
+    font-size: 10px;
 }
 
-.card img {
-    width: 100%;
-    height: auto;
-}
-
-.card p {
+.selected-card p {
+    display: flex;
     font-size: 0.9em;
     color: #333;
     align-items: center;
@@ -241,54 +220,15 @@ input[type="checkbox"] {
     }
 }
 
-#sleeves h1 {
+#sleeves h1, #card-details h1 {
     color: #333;
     margin-bottom: 20px;
 }
 
-#search-form1 {
-    display: flex;
-    align-items: center;
-}
-#search-form2 {
-    display: flex;
-    align-items: center;
-}
-
 #search-form2 input[type="text"] {
     flex: 10;
-    border-radius: 25px;
-    border: 2px solid #2980b9;
-    outline: none;
-    transition: border 0.3s ease;
     display: inline-block;
     width: 100%;
-}
-#search-form1 input[type="text"] {
-    flex: 10;
-    border-radius: 25px;
-    border: 2px solid #2980b9;
-    outline: none;
-    transition: border 0.3s ease;
-    display: inline-block;
-    width: 100%;
-}
-
-#search-form2 button {
-    padding: 9.5px 20px;
-    background: #2980b9;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s ease;
-    display: inline-block;
-
-}
-
-#search-form2  button:hover {
-    background: #1abc9c;
 }
 
 #search-form2 h2 {
@@ -297,145 +237,101 @@ input[type="checkbox"] {
 
 .card-list {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 20px;
 }
 
+.card-details {
+    display: flex;
+    align-content: center;
+    margin-top: 20px;
+}
 
-.card {
+.card, .selected-card {
     background: white;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
     text-align: center;
+}
+.card{
+    padding: 10px;
+}
+
+.selected-card{
+    padding: 10px 10px 0px 10px;
+    justify-content: center;
+}
+
+.card {
     width: 180px;
 }
 
-.card img {
+.selected-card {
+    display: block;
+    margin: 1.5em auto;
+    width: 240px;
+}
+
+.card img, .selected-card img {
     max-width: 100%;
     height: auto;
 }
 
 #sleeves {
-    width: 60%;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    padding: 1.5em;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 1.5em auto;
+}
+
+#card-details {
+    width: 25%;
+    margin: 1.5em auto;
+
 }
 
 #selected-card-list {
     list-style-type: none;
     padding: 0;
-    
 }
-.selected-cards h2 {
-    margin-bottom: 3.7%;
-}
+
 #selected-card-list li {
     margin-bottom: 10px;
     padding: 5px;
     background: #eee;
-    border-radius: 4px; 
+    border-radius: 4px;
 }
 
-.card {
+.card, .selected-card {
     display: flex;
     flex-direction: column; /* Per mantenere l'immagine sopra il testo */
     align-items: center; /* Centra l'immagine e il testo */
 }
 
-.sidebar .card{
-    margin-top: 10%;
-}
-
-/* Contenitore per ciascun menu a tendina */
-.menu-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    display: inline-block;
-
-}
-
-/* Etichetta dei menu */
-.menu-container label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: inline;
-}
-
-/* Stile per i dropdown */
-.menu-container select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    font-size: 0.75em;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #ffff;
-}
-
-/* Stilizzazione per migliorare la compatibilità con i dispositivi mobile */
-.menu-container select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Media query per allineare i menu orizzontalmente su schermi più larghi */
-@media (min-width: 768px) {
-    .menu-container {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .menu-container label {
-        margin-right: 15px;
-        margin-bottom: 0;
-    }
-
-    .menu-container select {
-        width: auto;
-        flex: 1;
-    }
-}
-
-/* Layout container per la sezione del deckbuilder */
 .deck-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-/* Stile per la sezione sinistra (barra di ricerca e lista di carte) */
 .left-section {
     width: 75%;
     padding-right: 20px;
 }
 
-/* Menu a tendina */
-.menu-container {
-    margin-bottom: 15px;
-}
-
-/* Lista delle carte */
 .card-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-/* Ogni carta */
 .card {
     background: white;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
     text-align: center;
     width: 180px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi transizione per l'ombra */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -443,63 +339,120 @@ input[type="checkbox"] {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta l'ombra per un effetto di profondità */
 }
 
-.card img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Carte selezionate */
-.selected-cards {
-    margin-bottom: 20px;
-}
-
-#selected-card-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-#selected-card-list li {
-    margin-bottom: 10px;
-    padding: 5px;
-    background: #ffff;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Bottone per rimuovere le carte selezionate */
-.remove-btn {
-    padding: 5px 8px;
-    background-color: lightgray;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out; /* Aggiungi la transizione qui */
-}
-
-.remove-btn:hover {
-    background-color: #e74c3c;
-    transition: 0.3s ease-in;
-}
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: 70%;
-    background: rgba(255, 255, 255, 0.9);
-    margin-right: 5%;
-    margin-bottom: 40%;
-    position: relative;
+.quantity-control {
+    display: flex; /* Utilizza Flexbox per disporre i contenuti in orizzontale */
+    align-items: center; /* Allinea verticalmente al centro */
+    justify-content: center; /* Centra gli elementi */
 }
 
 dl {
     list-style-type: none;
-    display: flex;
 }
 
-dl li {
-    display: inline-block;
-    margin: 0 15px;
+dl li{
+    display: inline;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+
+    button {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 8px 12px;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:disabled {
+        background-color: #c6c6c6;
+        cursor: not-allowed;
+    }
+
+    button:not(:disabled):hover {
+        background-color: #1abc9c;
+    }
+
+    #current-page {
+        margin: 0 10px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .card-sheet td:hover {
+        background-color: #333333; /* Colore di sfondo al passaggio del mouse */
+    }} /*non modificare*/
+
+    .card-sheet td {
+        padding: 8px;
+        background-color: white;
+        border-radius: 5px;
+
+    }
+
+/* Contenitore generale dei filtri */
+.filters-container {
+    text-align: center; /* Allinea gli elementi a sinistra */
+    margin-top: 20px; /* Margine superiore per separare dall'input di ricerca */
+}
+
+/* Contenitore per ogni menu */
+.menu-container {
+    display: inline-block; /* Posiziona gli elementi in linea */
+    vertical-align: top; /* Allinea i menu in alto */
+    margin-bottom: 1em;
+}
+
+/* Etichetta dei menu */
+.menu-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block; /* Imposta la label come block per occupare tutta la larghezza */
+}
+
+/* Stile per i dropdown */
+.menu-container select {
+    padding: 4%;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    width: 150px; /* Larghezza fissa per i select */
+    box-sizing: border-box; /* Include il padding e il bordo nella larghezza */
+}
+
+/* Contenitore per l'input di ricerca */
+.input-button-container {
+    display: block; /* Cambiato inline a flex per supportare gap */
+    gap: 10px; /* Spaziatura tra input e bottone */
+    margin-bottom: 20px;
+}
+
+/* Miglioramento per i dispositivi mobili */
+.menu-container select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+/* Adattamento su schermi più piccoli */
+@media (max-width: 768px) {
+    .menu-container {
+        width: 45%; /* I filtri si dispongono su due colonne sui dispositivi più piccoli */
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-container {
+        width: 100%; /* I filtri si dispongono su una singola colonna sui dispositivi molto piccoli */
+    }
+}
+
+#sleeves, #card-details{
+    animation: fadeIn 1s ease-in;
 }

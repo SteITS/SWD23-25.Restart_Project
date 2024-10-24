@@ -54,11 +54,7 @@ header nav {
     display: flex;
     align-items: center;
 }
-.menu-container{
-    border-radius: 10px;
-    background-color: #333;
-    color: white;
-}
+
 
 header nav ul {
     list-style-type: none;
@@ -178,7 +174,7 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
-#search, #matchups, #login-section, #home, #deck-list, #registration-form-section {
+#search, #matchups, #login-section, #home, #deck-list, #registration-form-section, #sleeves, #card-details {
     animation: fadeIn 1s ease-in;
 }
 #search {
@@ -202,7 +198,7 @@ input[type="checkbox"] {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per l'immagine */
 }
 
-.card img:hover {
+.card:hover {
     transform: scale(1.1); /* Scala l'immagine al 110% della dimensione originale */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Aumenta l'ombra per un effetto di profondità */
 }
@@ -414,6 +410,27 @@ tr td {
     
 }
 
+
+dl li {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.filters-container {
+    /* Usa Flexbox per disporre gli elementi */
+    flex-wrap: wrap;        /* Permette agli elementi di andare a capo */
+    justify-content: space-around; /* Distribuisce lo spazio tra gli elementi */
+}
+
+#sleeves {
+    width: 70%;
+    margin: 1.5em auto;
+}
+
+#sleeves h1, #card-details h1 {
+    color: #333;
+    margin-bottom: 20px;
+
 .modal {
     display: none;
     position: fixed;
@@ -441,4 +458,5 @@ tr td {
     font-size: 20px;
     float: right;
     cursor: pointer;
+
 }
