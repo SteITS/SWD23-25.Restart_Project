@@ -32,7 +32,7 @@ public class CardServiceImpl implements CardService {
     @Autowired
     private SleeveService sleeveService;
 
-    private static final int PAGE_SIZE = 15;  // Dimensione pagina per la ricerca filtrata (modificabile)
+    private static final int PAGE_SIZE = 60;  // Dimensione pagina per la ricerca filtrata (modificabile)
 
     //Metodo per ricercare tutte le carte secondo uno o più specifici filtri
     public CardDto getFilteredCards(String id, String name, String supertype, String type, String subtype, String set, int page, String orderBy, String direction) {

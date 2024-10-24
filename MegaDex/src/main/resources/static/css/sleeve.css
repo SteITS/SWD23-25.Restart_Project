@@ -10,7 +10,7 @@ html, body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    position: relative;
+
 }
 
 body {
@@ -131,7 +131,6 @@ section {
 }
 
 #search-form1, #search-form2 {
-    display: flex;
     align-items: center;
 }
 
@@ -185,6 +184,7 @@ form button:hover, .selected-card button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
 }
 
 .button-deck {
@@ -197,22 +197,6 @@ form button:hover, .selected-card button:hover {
     margin-top: 20px;
 }
 
-.card-sheet {
-    font-family: Arial, sans-serif;
-    max-height: 100vh;
-    overflow-y: auto;
-}
-
-/* Stili per i titoli delle proprietà */
-.card-sheet p {
-    margin: 10px 0;
-    font-size: 14px;
-}
-
-.card-sheet p span {
-    font-weight: bold;
-    color: #333;
-}
 
 .card-title {
     font-size: 10px;
@@ -253,7 +237,7 @@ form button:hover, .selected-card button:hover {
 
 .card-list {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -267,8 +251,16 @@ form button:hover, .selected-card button:hover {
     background: white;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
     text-align: center;
+}
+.card{
+    padding: 10px;
+}
+
+.selected-card{
+    padding: 10px 10px 0px 10px;
+    justify-content: center;
 }
 
 .card {
@@ -276,7 +268,7 @@ form button:hover, .selected-card button:hover {
 }
 
 .selected-card {
-    display: flex;
+    display: block;
     margin: 1.5em auto;
     width: 240px;
 }
@@ -294,6 +286,7 @@ form button:hover, .selected-card button:hover {
 #card-details {
     width: 25%;
     margin: 1.5em auto;
+
 }
 
 #selected-card-list {
@@ -312,52 +305,6 @@ form button:hover, .selected-card button:hover {
     display: flex;
     flex-direction: column; /* Per mantenere l'immagine sopra il testo */
     align-items: center; /* Centra l'immagine e il testo */
-}
-
-/* Contenitore per ciascun menu a tendina */
-.menu-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 calc(50% - 10px); /* Imposta la larghezza degli elementi al 50% meno un margine */
-    margin: 5px;
-}
-
-.menu-container label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.menu-container select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    font-size: 0.75em;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #ffff;
-}
-
-.menu-container select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-@media (min-width: 768px) {
-    .menu-container {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .menu-container label {
-        margin-right: 15px;
-        margin-bottom: 0;
-    }
-
-    .menu-container select {
-        width: auto;
-        flex: 1;
-    }
 }
 
 .deck-container {
@@ -381,7 +328,7 @@ form button:hover, .selected-card button:hover {
     background: white;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
     text-align: center;
     width: 180px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -402,14 +349,110 @@ dl {
     list-style-type: none;
 }
 
-dl li {
-    margin: 0 auto;
-    width: 90%;
+dl li{
+    display: inline;
 }
 
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+
+    button {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 8px 12px;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:disabled {
+        background-color: #c6c6c6;
+        cursor: not-allowed;
+    }
+
+    button:not(:disabled):hover {
+        background-color: #1abc9c;
+    }
+
+    #current-page {
+        margin: 0 10px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .card-sheet td:hover {
+        background-color: #333333; /* Colore di sfondo al passaggio del mouse */
+    }} /*non modificare*/
+
+    .card-sheet td {
+        padding: 8px;
+        background-color: white;
+        border-radius: 5px;
+
+    }
+
+/* Contenitore generale dei filtri */
 .filters-container {
-              /* Usa Flexbox per disporre gli elementi */
-    flex-wrap: wrap;        /* Permette agli elementi di andare a capo */
-    justify-content: space-around; /* Distribuisce lo spazio tra gli elementi */
+    text-align: center; /* Allinea gli elementi a sinistra */
+    margin-top: 20px; /* Margine superiore per separare dall'input di ricerca */
 }
 
+/* Contenitore per ogni menu */
+.menu-container {
+    display: inline-block; /* Posiziona gli elementi in linea */
+    vertical-align: top; /* Allinea i menu in alto */
+    margin-bottom: 1em;
+}
+
+/* Etichetta dei menu */
+.menu-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block; /* Imposta la label come block per occupare tutta la larghezza */
+}
+
+/* Stile per i dropdown */
+.menu-container select {
+    padding: 4%;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    width: 150px; /* Larghezza fissa per i select */
+    box-sizing: border-box; /* Include il padding e il bordo nella larghezza */
+}
+
+/* Contenitore per l'input di ricerca */
+.input-button-container {
+    display: block; /* Cambiato inline a flex per supportare gap */
+    gap: 10px; /* Spaziatura tra input e bottone */
+    margin-bottom: 20px;
+}
+
+/* Miglioramento per i dispositivi mobili */
+.menu-container select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+/* Adattamento su schermi più piccoli */
+@media (max-width: 768px) {
+    .menu-container {
+        width: 45%; /* I filtri si dispongono su due colonne sui dispositivi più piccoli */
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-container {
+        width: 100%; /* I filtri si dispongono su una singola colonna sui dispositivi molto piccoli */
+    }
+}
+
+#sleeves, #card-details{
+    animation: fadeIn 1s ease-in;
+}

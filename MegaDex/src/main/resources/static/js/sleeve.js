@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 home: "HOME",
                 deckbuilder: "DECKBUILDER",
                 community: "COMMUNITY",
+                sleeve: "RACCOGLITORE",
                 personalArea: "AREA PERSONALE"
             },
             buildDeck: "Raccoglitore",
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 home: "HOME",
                 deckbuilder: "DECKBUILDER",
                 community: "COMMUNITY",
+                sleeve: "BINDER",
                 personalArea: "MY ACCOUNT"
             },
             buildDeck: "Build your deck",
@@ -101,7 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector('nav ul li:nth-child(1) a').textContent = translation.header.home;
         document.querySelector('nav ul li:nth-child(2) a').textContent = translation.header.deckbuilder;
         document.querySelector('nav ul li:nth-child(3) a').textContent = translation.header.community;
-        document.querySelector('nav ul li:nth-child(4) a').textContent = translation.header.personalArea;
+        document.querySelector('nav ul li:nth-child(4) a').textContent = translation.header.sleeve;
+        document.querySelector('nav ul li:nth-child(5) a').textContent = translation.header.personalArea;
 
         // Cambia i testi delle varie sezioni
         document.querySelector('#sleeves h1').textContent = translation.buildDeck;
@@ -260,36 +263,128 @@ async function selectCard(cardId) {
         <button class="increment" onclick="updateQuantity('${card.id}', 1)">+</button>
         </div>
         </div>
-        <div class="card-sheet">
-        <p><span>Id:</span> ${card.id}</p>
-        <p><span>Set:</span> ${card.set}</p>
-        <p><span>Serie:</span> ${card.series}</p>
-        <p><span>Publisher:</span> ${card.publisher}</p>
-        <p><span>Generazione:</span> ${card.generation}</p>
-        <p><span>Data di rilascio:</span> ${card.release_date}</p>
-        <p><span>Artista:</span> ${card.artist}</p>
-        <p><span>Nome:</span> ${card.name}</p>
-        <p><span>Numero del set:</span> ${card.set_num}</p>
-        <p><span>Livello:</span> ${card.level}</p>
-        <p><span>Punti vita:</span> ${card.hp}</p>
-        <p><span>Evoluzione da:</span> ${card.evolves_from}</p>
-        <p><span>Evoluzione a:</span> ${card.evolves_to}</p>
-        <p><span>Costo di ritirata:</span> ${card.retreat_cost}</p>
-        <p><span>Costo di ritirata convertito:</span> ${card.converted_retreat_cost}</p>
-        <p><span>Rarità:</span> ${card.rarity}</p>
-        <p><span>Testo descrittivo:</span> ${card.flavor_text}</p>
-        <p><span>Numero nel Pokédex nazionale:</span> ${card.national_pokedex_numbers}</p>
-        <p><span>Legalità:</span> ${card.legalities}</p>
-        <p><span>Regole:</span> ${card.rules}</p>
-        <p><span>Marchio di regolamento:</span> ${card.regulation_mark}</p>
-        <p><span>Tratto antico:</span> ${card.ancient_trait}</p>
-        <p><span>Attacchi:</span> ${card.attacks}</p>
-        <p><span>Abilità:</span> ${card.abilities}</p>
-        <p><span>Debolezze:</span> ${card.weaknesses}</p>
-        <p><span>Resistenze:</span> ${card.resistances}</p>
-        <p><span>Tipi:</span> ${card.types}</p>
-        <p><span>Sottotipi:</span> ${card.subtypes}</p>
-        <p><span>Supertipo:</span> ${card.supertype}</p>
+       <div class="card-sheet">
+    <table>
+        <tbody>
+            <tr>
+                <td><strong>Id:</strong></td>
+                <td>${card.id}</td>
+            </tr>
+            <tr>
+                <td><strong>Set:</strong></td>
+                <td>${card.set}</td>
+            </tr>
+            <tr>
+                <td><strong>Serie:</strong></td>
+                <td>${card.series}</td>
+            </tr>
+            <tr>
+                <td><strong>Publisher:</strong></td>
+                <td>${card.publisher}</td>
+            </tr>
+            <tr>
+                <td><strong>Generazione:</strong></td>
+                <td>${card.generation}</td>
+            </tr>
+            <tr>
+                <td><strong>Data di rilascio:</strong></td>
+                <td>${card.release_date}</td>
+            </tr>
+            <tr>
+                <td><strong>Artista:</strong></td>
+                <td>${card.artist}</td>
+            </tr>
+            <tr>
+                <td><strong>Nome:</strong></td>
+                <td>${card.name}</td>
+            </tr>
+            <tr>
+                <td><strong>Numero del set:</strong></td>
+                <td>${card.set_num}</td>
+            </tr>
+            <tr>
+                <td><strong>Livello:</strong></td>
+                <td>${card.level}</td>
+            </tr>
+            <tr>
+                <td><strong>Punti vita:</strong></td>
+                <td>${card.hp}</td>
+            </tr>
+            <tr>
+                <td><strong>Evoluzione da:</strong></td>
+                <td>${card.evolves_from}</td>
+            </tr>
+            <tr>
+                <td><strong>Evoluzione a:</strong></td>
+                <td>${card.evolves_to}</td>
+            </tr>
+            <tr>
+                <td><strong>Costo di ritirata:</strong></td>
+                <td>${card.retreat_cost}</td>
+            </tr>
+            <tr>
+                <td><strong>Costo di ritirata convertito:</strong></td>
+                <td>${card.converted_retreat_cost}</td>
+            </tr>
+            <tr>
+                <td><strong>Rarità:</strong></td>
+                <td>${card.rarity}</td>
+            </tr>
+            <tr>
+                <td><strong>Testo descrittivo:</strong></td>
+                <td>${card.flavor_text}</td>
+            </tr>
+            <tr>
+                <td><strong>Numero nel Pokédex nazionale:</strong></td>
+                <td>${card.national_pokedex_numbers}</td>
+            </tr>
+            <tr>
+                <td><strong>Legalità:</strong></td>
+                <td>${card.legalities}</td>
+            </tr>
+            <tr>
+                <td><strong>Regole:</strong></td>
+                <td>${card.rules}</td>
+            </tr>
+            <tr>
+                <td><strong>Marchio di regolamento:</strong></td>
+                <td>${card.regulation_mark}</td>
+            </tr>
+            <tr>
+                <td><strong>Tratto antico:</strong></td>
+                <td>${card.ancient_trait}</td>
+            </tr>
+            <tr>
+                <td><strong>Attacchi:</strong></td>
+                <td>${card.attacks}</td>
+            </tr>
+            <tr>
+                <td><strong>Abilità:</strong></td>
+                <td>${card.abilities}</td>
+            </tr>
+            <tr>
+                <td><strong>Debolezze:</strong></td>
+                <td>${card.weaknesses}</td>
+            </tr>
+            <tr>
+                <td><strong>Resistenze:</strong></td>
+                <td>${card.resistances}</td>
+            </tr>
+            <tr>
+                <td><strong>Tipi:</strong></td>
+                <td>${card.types}</td>
+            </tr>
+            <tr>
+                <td><strong>Sottotipi:</strong></td>
+                <td>${card.subtypes}</td>
+            </tr>
+            <tr>
+                <td><strong>Supertipo:</strong></td>
+                <td>${card.supertype}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
     </div> 
       `;
     cardContainer.appendChild(cardElement);

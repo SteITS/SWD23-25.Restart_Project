@@ -174,7 +174,7 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
-#search, #matchups, #login-section, #home, #deck-list, #registration-form-section {
+#search, #matchups, #login-section, #home, #deck-list, #registration-form-section, #sleeves, #card-details {
     animation: fadeIn 1s ease-in;
 }
 #search {
