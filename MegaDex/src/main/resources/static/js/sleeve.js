@@ -266,121 +266,216 @@ async function selectCard(cardId) {
        <div class="card-sheet">
     <table>
         <tbody>
-            <tr>
-                <td><strong>Id:</strong></td>
-                <td>${card.id}</td>
-            </tr>
-            <tr>
-                <td><strong>Set:</strong></td>
-                <td>${card.set}</td>
-            </tr>
-            <tr>
-                <td><strong>Serie:</strong></td>
-                <td>${card.series}</td>
-            </tr>
-            <tr>
-                <td><strong>Publisher:</strong></td>
-                <td>${card.publisher}</td>
-            </tr>
-            <tr>
-                <td><strong>Generazione:</strong></td>
-                <td>${card.generation}</td>
-            </tr>
-            <tr>
-                <td><strong>Data di rilascio:</strong></td>
-                <td>${card.release_date}</td>
-            </tr>
-            <tr>
-                <td><strong>Artista:</strong></td>
-                <td>${card.artist}</td>
-            </tr>
-            <tr>
-                <td><strong>Nome:</strong></td>
-                <td>${card.name}</td>
-            </tr>
-            <tr>
-                <td><strong>Numero del set:</strong></td>
-                <td>${card.set_num}</td>
-            </tr>
-            <tr>
-                <td><strong>Livello:</strong></td>
-                <td>${card.level}</td>
-            </tr>
-            <tr>
-                <td><strong>Punti vita:</strong></td>
-                <td>${card.hp}</td>
-            </tr>
-            <tr>
-                <td><strong>Evoluzione da:</strong></td>
-                <td>${card.evolves_from}</td>
-            </tr>
-            <tr>
-                <td><strong>Evoluzione a:</strong></td>
-                <td>${card.evolves_to}</td>
-            </tr>
-            <tr>
-                <td><strong>Costo di ritirata:</strong></td>
-                <td>${card.retreat_cost}</td>
-            </tr>
-            <tr>
-                <td><strong>Costo di ritirata convertito:</strong></td>
-                <td>${card.converted_retreat_cost}</td>
-            </tr>
-            <tr>
-                <td><strong>Rarità:</strong></td>
-                <td>${card.rarity}</td>
-            </tr>
-            <tr>
-                <td><strong>Testo descrittivo:</strong></td>
-                <td>${card.flavor_text}</td>
-            </tr>
-            <tr>
-                <td><strong>Numero nel Pokédex nazionale:</strong></td>
-                <td>${card.national_pokedex_numbers}</td>
-            </tr>
-            <tr>
-                <td><strong>Legalità:</strong></td>
-                <td>${card.legalities}</td>
-            </tr>
-            <tr>
-                <td><strong>Regole:</strong></td>
-                <td>${card.rules}</td>
-            </tr>
-            <tr>
-                <td><strong>Marchio di regolamento:</strong></td>
-                <td>${card.regulation_mark}</td>
-            </tr>
-            <tr>
-                <td><strong>Tratto antico:</strong></td>
-                <td>${card.ancient_trait}</td>
-            </tr>
-            <tr>
-                <td><strong>Attacchi:</strong></td>
-                <td>${card.attacks}</td>
-            </tr>
-            <tr>
-                <td><strong>Abilità:</strong></td>
-                <td>${card.abilities}</td>
-            </tr>
-            <tr>
-                <td><strong>Debolezze:</strong></td>
-                <td>${card.weaknesses}</td>
-            </tr>
-            <tr>
-                <td><strong>Resistenze:</strong></td>
-                <td>${card.resistances}</td>
-            </tr>
-            <tr>
-                <td><strong>Tipi:</strong></td>
-                <td>${card.types}</td>
-            </tr>
-            <tr>
-                <td><strong>Sottotipi:</strong></td>
-                <td>${card.subtypes}</td>
-            </tr>
+            ${card.id ? `
+                <tr>
+                    <td><strong>Id:</strong></td>
+                    <td>${card.id}</td>
+                </tr>
+                ` : ''}
+            ${card.set ? `
+                <tr>
+                    <td><strong>Set:</strong></td>
+                    <td>${card.set}</td>
+                </tr>
+                ` : ''}
+            ${card.series ? `
+                <tr>
+                    <td><strong>Serie:</strong></td>
+                    <td>${card.series}</td>
+                </tr>
+                ` : ''}
+            ${card.publisher ? `
+                <tr>
+                    <td><strong>Publisher:</strong></td>
+                    <td>${card.publisher}</td>
+                </tr>
+                ` : ''}
+            ${card.generation ? `
+                <tr>
+                    <td><strong>Generazione:</strong></td>
+                    <td>${card.generation}</td>
+                </tr>
+                ` : ''}
+            ${card.release_date ? `
+                <tr>
+                    <td><strong>Data di rilascio:</strong></td>
+                    <td>${card.release_date}</td>
+                </tr>
+                ` : ''}
+            ${card.artist ? `
+                <tr>
+                    <td><strong>Artista:</strong></td>
+                    <td>${card.artist}</td>
+                </tr>
+                ` : ''}
+            ${card.name ? `
+                <tr>
+                    <td><strong>Nome:</strong></td>
+                    <td>${card.name}</td>
+                </tr>
+                ` : ''}
+            ${card.set_num ? `
+                <tr>
+                    <td><strong>Numero del set:</strong></td>
+                    <td>${card.set_num}</td>
+                </tr>
+                ` : ''}
+            ${card.level ? `
+                <tr>
+                    <td><strong>Livello:</strong></td>
+                    <td>${card.level}</td>
+                </tr>
+                ` : ''}
+            ${card.hp ? `
+                <tr>
+                    <td><strong>Punti vita:</strong></td>
+                    <td>${card.hp}</td>
+                </tr>
+                ` : ''}
+            ${card.evolves_from ? `
+                <tr>
+                    <td><strong>Evoluzione da:</strong></td>
+                    <td>${card.evolves_from}</td>
+                </tr>
+                ` : ''}
+            ${card.evolves_to ? `
+                <tr>
+                    <td><strong>Evoluzione a:</strong></td>
+                    <td>${card.evolves_to}</td>
+                </tr>
+                ` : ''}
+            ${card.retreat_cost ? `
+                <tr>
+                    <td><strong>Costo di ritirata:</strong></td>
+                    <td>${card.retreat_cost}</td>
+                </tr>
+                ` : ''}
+            ${card.converted_retreat_cost ? `
+                <tr>
+                    <td><strong>Costo di ritirata convertito:</strong></td>
+                    <td>${card.converted_retreat_cost}</td>
+                </tr>
+                ` : ''}
+            ${card.rarity ? `
+                <tr>
+                    <td><strong>Rarità:</strong></td>
+                    <td>${card.rarity}</td>
+                </tr>
+                ` : ''}
+            ${card.flavor_text ? `
+                <tr>
+                    <td><strong>Testo descrittivo:</strong></td>
+                    <td>${card.flavor_text}</td>
+                </tr>
+                ` : ''}
+            ${card.national_pokedex_numbers ? `
+                <tr>
+                    <td><strong>Numero nel Pokédex nazionale:</strong></td>
+                    <td>${card.national_pokedex_numbers}</td>
+                </tr>    
+                ` : ''}
+            ${card.legalities ? `
+                <tr>
+                    <td><strong>Legalità:</strong></td>
+                    <td>${card.legalities}</td>
+                </tr>    
+                ` : ''}
+                ${card.rules ? `
+                    <tr>
+                    <td><strong>Regole:</strong></td>
+                    <td>${card.rules}</td>
+                    </tr>
+                ` : ''}
+                ${card.regulation_mark ? `
+                    <tr>
+                    <td><strong>Marchio di regolamento:</strong></td>
+                    <td>${card.regulation_mark}</td>
+                    </tr>
+                ` : ''}
+                ${card.ancient_trait ? `
+                       <tr>
+                       <td><strong>Tratto antico:</strong></td>
+                       <td>${card.ancient_trait}</td>
+                       </tr>
+                ` : ''}
+                
+                ${!(card.attacks.length === 0) && card.attacks ? `<tr><td><strong>Attacchi:</strong></td><td>` : ''}
+                ${!(card.attacks.length === 0) && card.attacks ? card.attacks.map(a =>
+                                `
+                                <table>
+                                    <tbody>
+                                        <tr><td colspan="2"><strong>${a.attack_name}</strong></td></tr>
+                                        <tr><td><strong>Costo:</strong></td><td>${a.cost}</td></tr>
+                                        <tr><td><strong>Danno:</strong></td><td>${a.damage}</td></tr>
+                                        <tr><td><strong>Costo Convertito:</strong></td><td>${a.convertedEnergyCost}</td></tr>
+                                        <tr><td colspan="2">${a.text}</td></tr>
+                                    </tbody>
+                                </table>                                
+                                `
+                ).join('') : ''}
+                ${!(card.attacks.length === 0) && card.attacks ? `</td></tr>` : ''}
+                ${!(card.abilities.length === 0) && card.abilities ? `<tr><td><strong>Abilità:</strong></td><td>` : ''}
+                ${!(card.abilities.length === 0) && card.abilities ? card.abilities.map(a =>
+                                `
+                                    <table>
+                                       <tbody>
+                                           <tr><td colspan="2"><strong>${a.name}</strong></td></tr>
+                                           <tr><td colspan="2">${a.text}</td></tr>
+                                           <tr><td><strong>Tipo:</strong></td><td>${a.type}</td></tr>
+                                       </tbody>
+                                    </table>
+                                    `
+                ).join('') : ''}
+                ${!(card.abilities.length === 0) && card.abilities ? `</td></tr>` : ''}
+            ${!(card.weaknesses.length === 0) && card.weaknesses ? `<tr><td><strong>Debolezze:</strong></td><td>` : ''}    
+            ${!(card.weaknesses.length === 0) && card.weaknesses ? card.weaknesses.map(a =>
+                                `
+                                    <table>
+                                       <tbody>
+                                             <tr><td><strong>Tipo:</strong></td><td>${a.text}</td></tr>
+                                             <tr><td><strong>Valore:</strong></td><td>${a.value}</td></tr>
+                                       </tbody>
+                                    </table>
+                                    `
+            ).join('') : ''}
+            ${!(card.weaknesses.length === 0) && card.weaknesses ? `</td></tr>` : ''}
+            ${!(card.resistances.length === 0) && card.resistances ? `<tr><td><strong>Resistenze:</strong></td><td>` : ''}
+            ${!(card.resistances.length === 0) && card.resistances ? card.resistances.map(a =>
+                                `
+                                    <table>
+                                       <tbody>
+                                             <tr><td><strong>Tipo:</strong></td><td>${a.type}</td></tr>
+                                             <tr><td><strong>Valore:</strong></td><td>${a.value}</td></tr>
+                                       </tbody>
+                                    </table>
+                                    `
+        ).join('') : ''}
+        ${!(card.resistances.length === 0) && card.resistances ? `</td></tr>` : ''}
+        ${!(card.types.length === 0) && card.types ? `<tr><td><strong>Tipi:</strong></td><td>` : ''}        
+            ${!(card.types.length === 0) && card.types ? card.types.map(a =>
+                                    `
+                                        <table>
+                                           <tbody>
+                                                 <tr>${a.name}</tr>
+                                           </tbody>
+                                        </table>
+                                        `
+            ).join('') : ''}
+            ${!(card.types.length === 0) && card.types ? `</td></tr>` : ''}
+            ${!(card.subtypes.length === 0) && card.subtypes ? `<tr><td><strong>Sottotipi:</strong></td><td>` : ''}     
+            ${!(card.subtypes.length === 0) && card.subtypes ? card.subtypes.map(a =>
+                `
+                <table>
+                   <tbody>
+                         <tr>${a.name}</tr>
+                   </tbody>
+                </table>
+                `
+        ).join('') : ''}
+        ${!(card.subtypes.length === 0) && card.subtypes ? `</td></tr>` : ''}        
             <tr>
                 <td><strong>Supertipo:</strong></td>
-                <td>${card.supertype}</td>
+                <td>${card.supertype.name}</td>
             </tr>
         </tbody>
     </table>
