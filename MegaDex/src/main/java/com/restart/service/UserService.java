@@ -22,4 +22,6 @@ public interface UserService {
     List<User> getAllUsers();
 
     Optional<User> findUserById(Integer id);
+    
+    void deleteUserById(Integer id);
 }

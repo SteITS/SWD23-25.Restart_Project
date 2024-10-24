@@ -5,10 +5,7 @@ import com.restart.service.UserServiceImpl;
 import com.restart.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +27,12 @@ public class UserController {
     public ResponseEntity<User> getCurrentUser() {
         return ResponseEntity.ok(userService.getAuthenticatedUser());
     }
+
+    // Rimuove dal db l'utente con l'id specificato
+    @DeleteMapping("auth/deleteUser/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().build();
+    }
+    
 }

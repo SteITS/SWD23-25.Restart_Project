@@ -159,4 +159,10 @@ public class UserServiceImpl implements UserService {
         // Salva il ruolo nel database e restituiscilo
         return roleRepository.save(role);
     }
+    
+    // Metodo per eliminare un utente dal database in base all'ID
+    @Override
+    public void deleteUserById(Integer id) {
+        userRepository.deleteById(id);
+    }
 }
