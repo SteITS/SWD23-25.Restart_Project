@@ -22,6 +22,12 @@ document.addEventListener('submit', function() {
                 if(response.status === 409){
                     throw new Error("Email già utilizzata");
                 }
+                if(response.status === 304){
+                    throw new Error("L'email non è corretta");
+                }
+                if(response.status === 406){
+                    throw new Error("La password deve essere lunga almeno 12 caratteri, contenendo almeno una maiuscola, una minuscola, un numero e un carattere speciale.");
+                }
                 throw new Error("Errore sconosciuto durante la registrazione");
 
 

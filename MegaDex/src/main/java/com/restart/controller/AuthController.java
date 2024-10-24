@@ -37,19 +37,24 @@ public class AuthController {
                                BindingResult result,
                                Model model){
         User existingUser = userService.findUserByEmail(userDto.getEmail());
-        System.out.println("Received password: " + userDto.getPassword());
+        if(!userService.checkEmail(userDto.getEmail())){
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED) // 304
+                .body(userDto);
+        }
+        if(!userService.checkPassword(userDto.getPassword())){
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE) // 406
+                    .body(userDto);
+        }
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
-            return ResponseEntity.status(HttpStatus.CONFLICT) // 409 Conflict
+            return ResponseEntity.status(HttpStatus.CONFLICT) // 409
                     .body(userDto);
         }
-
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
             return ResponseEntity.internalServerError().body(userDto);
         }
-
         userService.saveUser(userDto);
         return ResponseEntity.ok(userDto);
     }
