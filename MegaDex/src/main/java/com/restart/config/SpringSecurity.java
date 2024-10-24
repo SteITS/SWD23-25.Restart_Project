@@ -1,5 +1,6 @@
 package com.restart.config;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,6 +51,10 @@ public class SpringSecurity {
                                 .loginPage("/login.html")
                                 .loginProcessingUrl("/login")
                                 .defaultSuccessUrl("/personale.html", true)
+                                .failureHandler((request, response, exception) -> {
+                                    // Imposta il codice di stato HTTP personalizzato
+                                    response.setStatus(HttpServletResponse.SC_FORBIDDEN); // Cambia il codice secondo le tue necessità
+                                })
                                 .permitAll()
                 ).logout(
                         logout -> logout

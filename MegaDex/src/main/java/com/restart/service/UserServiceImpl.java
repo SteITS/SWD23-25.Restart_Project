@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,6 +47,13 @@ public class UserServiceImpl implements UserService {
         // Codifica la password utilizzando Spring Security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
+        // Imposta il numero di telefono
+        user.setPhone(userDto.getPhone());
+
+        // Imposta la data di nascita
+        user.setDob(userDto.getDob());
+
+
         // Recupera il ruolo "ROLE_ADMIN" dal repository
         Role role = roleRepository.findByName("ROLE_ADMIN");
 
@@ -58,6 +67,22 @@ public class UserServiceImpl implements UserService {
 
         // Salva l'utente nel database
         userRepository.save(user);
+    }
+
+    @Override
+    public Boolean checkEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    @Override
+    public Boolean checkPassword(String password) {
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&_])[A-Za-z\\d@$!%*?&_]{8,}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches() && password.length() >= 12;
     }
 
     //Metodo per recuperare l'utente attualmente autenticato nella sessione
@@ -115,6 +140,12 @@ public class UserServiceImpl implements UserService {
         // Imposta l'email
         userDto.setEmail(user.getEmail());
 
+        // Imposta la data di nascita
+        userDto.setDob(user.getDob());
+
+        // Imposta il numero di telefono
+        userDto.setPhone(user.getPhone());
+
         // Restituisce il DTO dell'utente
         return userDto;
     }
@@ -127,5 +158,11 @@ public class UserServiceImpl implements UserService {
 
         // Salva il ruolo nel database e restituiscilo
         return roleRepository.save(role);
+    }
+    
+    // Metodo per eliminare un utente dal database in base all'ID
+    @Override
+    public void deleteUserById(Integer id) {
+        userRepository.deleteById(id);
     }
 }

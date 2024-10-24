@@ -35,8 +35,8 @@
     <section id="login-section">
         <div id="login">
             <h1>Accedi come allenatore</h1>
-            <!-- Collegamento corretto del form con Thymeleaf -->
-            <form id="login-form" action="http://localhost:8080/login" method="post">
+            <form id="login-form" method="post">
+
                 <label for="username">Utente:</label>
                 <input type="text" id="username" name="username" placeholder="Trainer ID" maxlength="30" required>
 
@@ -44,11 +44,17 @@
                 <input type="password" id="password" name="password" placeholder="********" maxlength="30" required>
 
                 <button type="submit">Accedi</button>
-                <p class="registrati">Non sei ancora registrato? <br><a href="/registrazione.html"> Registrati qui </a></p>
+                <p class="registrati">Non sei ancora registrato? <br><a href="register.html"> Registrati qui </a></p>
             </form>
         </div>
     </section>
 </main>
+<div id="error-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="error-message">Si è verificato un errore nella registrazione. Riprova.</p>
+    </div>
+</div>
 
 <!-- Collegamento corretto al file JavaScript usando Thymeleaf -->
 <script src="./js/login.js" defer></script>
